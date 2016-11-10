@@ -155,11 +155,11 @@
                     </span>
                     <div class="tags text-center">
                         
-                        <a class="tag" href="/tags/#Xcode"
-                           title="Xcode">Xcode</a>
-                        
                         <a class="tag" href="/tags/#iOS"
                            title="iOS">iOS</a>
+                        
+                        <a class="tag" href="/tags/#Xcode"
+                           title="Xcode">Xcode</a>
                         
                     </div>
                 </div>
@@ -179,9 +179,15 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <h3 id="目前可用的标签"><a href="#目前可用的标签" class="headerlink" title="目前可用的标签"></a>目前可用的标签</h3><font color="red">// TODO:</font>标识将来要完成的内容；<br><br><font color="red">// FIXME:</font>标识以后要修正或完善的内容。<br><br><font color="red">// ???:</font>疑问的地方<br><br><font color="red">// !!!:</font>需要注意的地方<br><br>以上四个提示xcode已经支持。<br><br>### 可自定义的标签<br><br><p>添加自定义的标识，并在编译时，在warning中显示出来；</p><br><br><font color="red">target</font>–&gt;<font color="red">build phases</font>–&gt;<font color="red">editor（就是‘+’号）</font>–&gt;<font color="red">add run script build phases</font>
+                <h3 id="目前可用的标签"><a href="#目前可用的标签" class="headerlink" title="目前可用的标签"></a>目前可用的标签</h3><p><font color="red">// TODO:</font>标识将来要完成的内容；</p>
+<p><font color="red">// FIXME:</font>标识以后要修正或完善的内容。</p>
+<p><font color="red">// ???:</font>疑问的地方</p>
+<p><font color="red">// !!!:</font>需要注意的地方</p>
+<p>以上四个提示xcode已经支持。</p>
 
-<p>把下面的代码粘贴到shell框中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">KEYWORDS=&quot;TODO:|FIXME:|???:|!!!:|XXX:&quot;</div><div class="line">find &quot;$&#123;SRCROOT&#125;&quot; −name&quot;∗.h&quot;−or−name&quot;∗.m&quot; -print0 | xargs -0 egrep --with-filename --line-number --only-matching &quot;($KEYWORDS).*\$&quot; | perl -p -e &quot;s/($KEYWORDS)/ warning: \$1/&quot;</div></pre></td></tr></table></figure></p>
+<h3 id="可自定义的标签"><a href="#可自定义的标签" class="headerlink" title="可自定义的标签"></a>可自定义的标签</h3><p></p><p>添加自定义的标识，并在编译时，在warning中显示出来:</p>
+<p><font color="red">target</font>–&gt;<font color="red">build phases</font>–&gt;<font color="red">editor（就是‘+’号）</font>–&gt;<font color="red">add run script build phases</font><br></p><p></p>
+<p></p><p>把下面的代码粘贴到shell框中</p><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">KEYWORDS=&quot;TODO:|FIXME:|???:|!!!:|XXX:&quot;</div><div class="line">find &quot;$&#123;SRCROOT&#125;&quot; −name&quot;∗.h&quot;−or−name&quot;∗.m&quot; -print0 | xargs -0 egrep --with-filename --line-number --only-matching &quot;($KEYWORDS).*\$&quot; | perl -p -e &quot;s/($KEYWORDS)/ warning: \$1/&quot;</div></pre></td></tr></table></figure><p></p>
 
                 <hr>
                 
@@ -204,7 +210,7 @@
 
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#目前可用的标签"><span class="toc-text">目前可用的标签</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#目前可用的标签"><span class="toc-text">目前可用的标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#可自定义的标签"><span class="toc-text">可自定义的标签</span></a></li></ol>
                 </div>
             </div>
         </div>
@@ -226,11 +232,11 @@
                     </h5>
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#Xcode"
-                           title="Xcode">Xcode</a>
-                        
                         <a class="tag" href="/tags/#iOS"
                            title="iOS">iOS</a>
+                        
+                        <a class="tag" href="/tags/#Xcode"
+                           title="Xcode">Xcode</a>
                         
                     </div>
                 </section>
