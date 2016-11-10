@@ -18,11 +18,11 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
     <title>
         
-        tags｜Roach&#39;s blog
+        Xcode中自定义TODO 、FIXME 、!!! 、???等自定义标签警告｜Roach&#39;s blog
         
     </title>
 
-    <link rel="canonical" href="https://jakajacky.github.io/tags/">
+    <link rel="canonical" href="https://jakajacky.github.io/2016/11/10/Xcode中自定义TODO 、FIXME 、!!! 、???等自定义标签警告/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -43,7 +43,7 @@
 <!-- hack iOS CSS :active style -->
 <body ontouchstart="" class="animated fadeIn">
 <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "false" data-istags="false
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
 " data-ishome = "false" >
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -123,188 +123,131 @@
 </script>
 
 <!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="/images/post-default.jpg">
+
+
 <style>
-    .intro-header .site-heading {
-        margin: 50px;
+    
+    header.intro-header {
+        background-image: url('/images/post-default.jpg')
     }
+
+    
 </style>
 
-<!-- Page Header -->
 <header class="intro-header">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
-                <div class="site-heading text-center">
-                    <h1>tags</h1>
-                    <span class="subheading">iOSのcoder</span>
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>Xcode中自定义TODO 、FIXME 、!!! 、???等自定义标签警告</h1>
+                    
+                    <span class="meta">
+                         作者 john
+                        <span>
+                          日期 2016-11-10
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#Xcode"
+                           title="Xcode">Xcode</a>
+                        
+                        <a class="tag" href="/tags/#iOS"
+                           title="iOS">iOS</a>
+                        
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            Xcode中自定义TODO 、FIXME 、!!! 、???等自定义标签警告
+        </span>
     </div>
 </header>
 
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <!-- 标签云 -->
-            <div id='tag_cloud' class="tags">
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h2 id="目前可用的标签"><a href="#目前可用的标签" class="headerlink" title="目前可用的标签"></a>目前可用的标签</h2><font color="red">// TODO:</font>标识将来要完成的内容；<br><br><font color="red">// FIXME:</font>标识以后要修正或完善的内容。<br><br><font color="red">// ???:</font>疑问的地方<br><br><font color="red">// !!!:</font>需要注意的地方<br><br>以上四个提示xcode已经支持。<br><br>## 可自定义的标签<br><br>添加自定义的标识，并在编译时，在warning中显示出来；<br><br><font color="red">target</font>–&gt;<font color="red">build phases</font>–&gt;<font color="red">editor（就是‘+’号）</font>–&gt;<font color="red">add run script build phases</font>
+
+<p>把下面的代码粘贴到shell框中<br>、、、<br>KEYWORDS=”TODO:|FIXME:|???:|!!!:|XXX:”<br>find “${SRCROOT}” −name”∗.h”−or−name”∗.m” -print0 | xargs -0 egrep –with-filename –line-number –only-matching “($KEYWORDS).*\$” | perl -p -e “s/($KEYWORDS)/ warning: \$1/“<br>、、、</p>
+
+                <hr>
                 
-                <a href="#小记" title="小记" rel="1">小记</a>
+
+                <ul class="pager">
+                    
+                    
+                    <li class="next">
+                        <a href="/2016/11/10/微信小程序 示例开发/" data-toggle="tooltip" data-placement="top"
+                           title="微信小程序 开发示例">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
                 
-                <a href="#Xcode" title="Xcode" rel="1">Xcode</a>
+
                 
-                <a href="#iOS" title="iOS" rel="2">iOS</a>
-                
-                <a href="#UIBezierPath" title="UIBezierPath" rel="1">UIBezierPath</a>
-                
-                <a href="#CADisplayLink" title="CADisplayLink" rel="1">CADisplayLink</a>
-                
-                <a href="#波浪动画" title="波浪动画" rel="1">波浪动画</a>
-                
-                <a href="#微信小程序" title="微信小程序" rel="1">微信小程序</a>
-                
+
             </div>
 
-            <!-- 标签列表 -->
-            
-            <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="小记">
-                    <span class="tag-text">小记</span>
-                </span>
-                
-                <div class="post-preview">
-                    <a href="/2016/11/04/CSDN到github pages+Hexo迁移/">
-                        <h2 class="post-title">
-                            CSDN到github pages+Hexo迁移
-                        </h2>
-                        
-                        <h3 class="post-subtitle">
-                            hi, I'm roach
-                        </h3>
-                        
-                    </a>
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#目前可用的标签"><span class="toc-text">目前可用的标签</span></a></li></ol>
                 </div>
-                <hr>
-                
             </div>
-            
-            <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="Xcode">
-                    <span class="tag-text">Xcode</span>
-                </span>
-                
-                <div class="post-preview">
-                    <a href="/2016/11/10/Xcode中自定义TODO 、FIXME 、!!! 、???等自定义标签警告/">
-                        <h2 class="post-title">
-                            Xcode中自定义TODO 、FIXME 、!!! 、???等自定义标签警告
-                        </h2>
-                        
-                    </a>
-                </div>
-                <hr>
-                
-            </div>
-            
-            <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="iOS">
-                    <span class="tag-text">iOS</span>
-                </span>
-                
-                <div class="post-preview">
-                    <a href="/2016/11/10/Xcode中自定义TODO 、FIXME 、!!! 、???等自定义标签警告/">
-                        <h2 class="post-title">
-                            Xcode中自定义TODO 、FIXME 、!!! 、???等自定义标签警告
-                        </h2>
-                        
-                    </a>
-                </div>
-                <hr>
-                
-                <div class="post-preview">
-                    <a href="/2016/11/08/UIBezierPath实现波浪动画/">
-                        <h2 class="post-title">
-                            UIBezierPath实现波浪动画
-                        </h2>
-                        
-                    </a>
-                </div>
-                <hr>
-                
-            </div>
-            
-            <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="UIBezierPath">
-                    <span class="tag-text">UIBezierPath</span>
-                </span>
-                
-                <div class="post-preview">
-                    <a href="/2016/11/08/UIBezierPath实现波浪动画/">
-                        <h2 class="post-title">
-                            UIBezierPath实现波浪动画
-                        </h2>
-                        
-                    </a>
-                </div>
-                <hr>
-                
-            </div>
-            
-            <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="CADisplayLink">
-                    <span class="tag-text">CADisplayLink</span>
-                </span>
-                
-                <div class="post-preview">
-                    <a href="/2016/11/08/UIBezierPath实现波浪动画/">
-                        <h2 class="post-title">
-                            UIBezierPath实现波浪动画
-                        </h2>
-                        
-                    </a>
-                </div>
-                <hr>
-                
-            </div>
-            
-            <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="波浪动画">
-                    <span class="tag-text">波浪动画</span>
-                </span>
-                
-                <div class="post-preview">
-                    <a href="/2016/11/08/UIBezierPath实现波浪动画/">
-                        <h2 class="post-title">
-                            UIBezierPath实现波浪动画
-                        </h2>
-                        
-                    </a>
-                </div>
-                <hr>
-                
-            </div>
-            
-            <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="微信小程序">
-                    <span class="tag-text">微信小程序</span>
-                </span>
-                
-                <div class="post-preview">
-                    <a href="/2016/11/10/微信小程序 示例开发/">
-                        <h2 class="post-title">
-                            微信小程序 开发示例
-                        </h2>
-                        
-                    </a>
-                </div>
-                <hr>
-                
-            </div>
-            
-
         </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#Xcode"
+                           title="Xcode">Xcode</a>
+                        
+                        <a class="tag" href="/tags/#iOS"
+                           title="iOS">iOS</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
     </div>
-</div>
+</article>
+
+
+
+
+
 
 <!-- Footer -->
 <!-- Footer -->
