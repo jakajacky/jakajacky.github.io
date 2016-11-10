@@ -186,7 +186,7 @@
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
                 <h2 id="Mark："><a href="#Mark：" class="headerlink" title="Mark："></a>Mark：</h2><p></p><p>最近使用频繁的CAShaperLayer、CABasicAnimation、CAKeyframeAnimation，突然想实现一个以前APP中波浪线，效果如下：</p><br><img src="http://upload-images.jianshu.io/upload_images/329672-8235dc58632c0963.gif?imageMogr2/auto-orient/strip" alt="这里写图片描述"><p></p>
-<p>&amp;nbsp&amp;nbsp&amp;nbsp&amp;nbsp<font color="gray">开始的调查发现，核心在于使用正弦函数sinf生成点，但是没有想到使用CGMutablePathRef以点划线，然后通过不停的改变sinf中的参数以及结果，来实现动画的效果。<font></font></font></p><br><p>我使用了UIBezierPath，但是常规的UIBezierPath只有最多两个controlPoint，例如下面：</p>
+<p><font color="gray">开始的调查发现，核心在于使用正弦函数sinf生成点，但是没有想到使用CGMutablePathRef以点划线，然后通过不停的改变sinf中的参数以及结果，来实现动画的效果。<font></font></font></p><br><p>我使用了UIBezierPath，但是常规的UIBezierPath只有最多两个controlPoint，例如下面：</p>
 
 <h2 id="代码实现："><a href="#代码实现：" class="headerlink" title="代码实现："></a>代码实现：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">path.move(to: _point)</div><div class="line">path.addCurve(to: _point1, controlPoint1: con1, controlPoint2: con2)</div></pre></td></tr></table></figure>
 <p>那么也就能画出一个周期：<br><img src="http://upload-images.jianshu.io/upload_images/329672-d708b887c2bbf1ee.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这里写图片描述"></p>
