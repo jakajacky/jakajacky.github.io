@@ -18,11 +18,11 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
     <title>
         
-        Xcode中自定义TODO 、FIXME 、cd /Users/xqzh/hexo/source/_posts; clear; pwd! 、???等自定义标签警告｜Roach&#39;s blog
+        Roach&#39;s blog
         
     </title>
 
-    <link rel="canonical" href="https://jakajacky.github.io/2016/11/10/Xcode中自定义TODO-、FIXME-、cd-Users-xqzh-hexo-source-posts-clear-pwd-、-等自定义标签警告/">
+    <link rel="canonical" href="https://jakajacky.github.io/tags/iMessage/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -43,7 +43,7 @@
 <!-- hack iOS CSS :active style -->
 <body ontouchstart="" class="animated fadeIn">
 <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "false" data-istags="true
 " data-ishome = "false" >
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -123,142 +123,6 @@
 </script>
 
 <!-- Main Content -->
-
-<!--only post-->
-
-
-<img class="wechat-title-img"
-     src="/images/post-default.jpg">
-
-
-<style>
-    
-    header.intro-header {
-        background-image: url('/images/post-default.jpg')
-    }
-
-    
-</style>
-
-<header class="intro-header">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
-                <div class="post-heading">
-                    <h1>Xcode中自定义TODO 、FIXME 、cd /Users/xqzh/hexo/source/_posts; clear; pwd! 、???等自定义标签警告</h1>
-                    
-                    <span class="meta">
-                         作者 john
-                        <span>
-                          日期 2016-11-10
-                         </span>
-                    </span>
-                    <div class="tags text-center">
-                        
-                        <a class="tag" href="/tags/#iOS"
-                           title="iOS">iOS</a>
-                        
-                        <a class="tag" href="/tags/#Xcode"
-                           title="Xcode">Xcode</a>
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="post-title-haojen">
-        <span>
-            Xcode中自定义TODO 、FIXME 、cd /Users/xqzh/hexo/source/_posts; clear; pwd! 、???等自定义标签警告
-        </span>
-    </div>
-</header>
-
-<!-- Post Content -->
-<article>
-    <div class="container">
-        <div class="row">
-            <!-- Post Container -->
-            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <h3 id="目前可用的标签"><a href="#目前可用的标签" class="headerlink" title="目前可用的标签"></a>目前可用的标签</h3><p><font color="red">// TODO:</font>标识将来要完成的内容；</p>
-<p><font color="red">// FIXME:</font>标识以后要修正或完善的内容。</p>
-<p><font color="red">// ???:</font>疑问的地方</p>
-<p><font color="red">// !!!:</font>需要注意的地方</p>
-<p>以上四个提示xcode已经支持。</p>
-
-<h3 id="可自定义的标签"><a href="#可自定义的标签" class="headerlink" title="可自定义的标签"></a>可自定义的标签</h3><p></p><p>添加自定义的标识，并在编译时，在warning中显示出来:</p>
-<p><font color="red">target</font>–&gt;<font color="red">build phases</font>–&gt;<font color="red">editor（就是‘+’号）</font>–&gt;<font color="red">add run script build phases</font><br></p><p></p>
-<p></p><p>把下面的代码粘贴到shell框中</p><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">KEYWORDS=&quot;TODO:|FIXME:|???:|!!!:|XXX:&quot;</div><div class="line">find &quot;$&#123;SRCROOT&#125;&quot; −name&quot;∗.h&quot;−or−name&quot;∗.m&quot; -print0 | xargs -0 egrep --with-filename --line-number --only-matching &quot;($KEYWORDS).*\$&quot; | perl -p -e &quot;s/($KEYWORDS)/ warning: \$1/&quot;</div></pre></td></tr></table></figure><p></p>
-
-                <hr>
-                
-
-                <ul class="pager">
-                    
-                    <li class="previous">
-                        <a href="/2016/11/11/iMessage Apps and Stickers, Part 1/" data-toggle="tooltip" data-placement="top"
-                           title="iMessage Apps and Stickers, Part 1">&larr; Previous Post</a>
-                    </li>
-                    
-                    
-                    <li class="next">
-                        <a href="/2016/11/10/微信小程序 示例开发/" data-toggle="tooltip" data-placement="top"
-                           title="微信小程序 开发示例">Next Post &rarr;</a>
-                    </li>
-                    
-                </ul>
-
-                
-
-                
-
-            </div>
-
-            <div class="hidden-xs col-sm-3 toc-col">
-                <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#目前可用的标签"><span class="toc-text">目前可用的标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#可自定义的标签"><span class="toc-text">可自定义的标签</span></a></li></ol>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <!-- Sidebar Container -->
-
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
-
-                <!-- Featured Tags -->
-                
-                <section>
-                    <!-- no hr -->
-                    <h5 class="text-center">
-                        <a href="/tags/">FEATURED TAGS</a>
-                    </h5>
-                    <div class="tags">
-                        
-                        <a class="tag" href="/tags/#iOS"
-                           title="iOS">iOS</a>
-                        
-                        <a class="tag" href="/tags/#Xcode"
-                           title="Xcode">Xcode</a>
-                        
-                    </div>
-                </section>
-                
-
-                <!-- Friends Blog -->
-                
-            </div>
-        </div>
-
-    </div>
-</article>
-
-
-
-
-
 
 <!-- Footer -->
 <!-- Footer -->
