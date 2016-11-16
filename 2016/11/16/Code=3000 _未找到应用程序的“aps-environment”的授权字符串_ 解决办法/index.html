@@ -18,11 +18,11 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
     <title>
         
-        APP兼容64位之后，UIImageView等控件不显示，图片等内容不显示｜Roach&#39;s blog
+        Code=3000 &quot;未找到应用程序的“aps-environment”的授权字符串&quot; 解决办法｜Roach&#39;s blog
         
     </title>
 
-    <link rel="canonical" href="https://jakajacky.github.io/2016/11/15/APP兼容64位之后，UIImageView等控件不显示，图片等内容不显示/">
+    <link rel="canonical" href="https://jakajacky.github.io/2016/11/16/Code=3000 _未找到应用程序的“aps-environment”的授权字符串_ 解决办法/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -145,12 +145,12 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
                 <div class="post-heading">
-                    <h1>APP兼容64位之后，UIImageView等控件不显示，图片等内容不显示</h1>
+                    <h1>Code=3000 &quot;未找到应用程序的“aps-environment”的授权字符串&quot; 解决办法</h1>
                     
                     <span class="meta">
                          作者 john
                         <span>
-                          日期 2016-11-15
+                          日期 2016-11-16
                          </span>
                     </span>
                     <div class="tags text-center">
@@ -158,8 +158,8 @@
                         <a class="tag" href="/tags/#iOS"
                            title="iOS">iOS</a>
                         
-                        <a class="tag" href="/tags/#64位"
-                           title="64位">64位</a>
+                        <a class="tag" href="/tags/#aps-environment"
+                           title="aps-environment">aps-environment</a>
                         
                     </div>
                 </div>
@@ -168,7 +168,7 @@
     </div>
     <div class="post-title-haojen">
         <span>
-            APP兼容64位之后，UIImageView等控件不显示，图片等内容不显示
+            Code=3000 "未找到应用程序的“aps-environment”的授权字符串" 解决办法
         </span>
     </div>
 </header>
@@ -179,28 +179,26 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <h3 id="Mark"><a href="#Mark" class="headerlink" title="Mark:"></a>Mark:</h3><p>距离上次给一个APP升级 兼容64位 过去很长时间了，今天又遇到一个，本来觉得很easy的，更新sqlcipher、jsonkit、不合适的静态库就好了，具体见我<a href="http://blog.csdn.net/u010731949/article/details/52457548" target="_blank" rel="external">另一篇</a></p><br>### 诡异问题：<br><p>但是问题来了，所有配置工作做好了，也跑起来了，但是APP里的内容呢？word哥！！！空白一片，按钮不见了，图片不见了，，，各种控件不见了。<font color="red">但是诡异也很关键的是：空白处有响应事件的按钮，cell都可以点击</font></p>
-
-<h3 id="推测："><a href="#推测：" class="headerlink" title="推测："></a>推测：</h3><p>那么内容不显示，但是事件可以点击，是不是很像我们经常处理的<font color="red">alpha=0</font>的情况？我检查N遍，并没有设置任何控件alpha=0，但是别忘了，alpha值是CGFloat类型，而我在<font color="red">Xcode警告栏</font>里发现了修改为64位之后<font color="red">N多个警告</font>，例如：<font color="red">Implicit conversion loses integer precision：‘NSInteger’ to ‘int’</font>或者是<font color="red">‘CGFloat’to ‘float’</font>诸如此类。</p><br><p>那么会不会是alpha值由于‘CGFloat’to ‘float’失败，而<font color="blue">导致默认设置alpha=1失败，变成了alpha=0呢？</font></p>
-
-<h3 id="定位问题："><a href="#定位问题：" class="headerlink" title="定位问题："></a>定位问题：</h3><p>终于在<a href="http://stackoverflow.com/questions/20855176/images-not-showing-up-when-architecture-set-to-64-bit" target="_blank" rel="external">这里</a>找到了答案</p><br><p>大概意思就是，下面这个不再适用于64位，需要将<font color="red">float</font>改为<font color="red">CGFloat</font>,也证实了我的猜想</p><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">- (void)setAlpha:(float)alpha &#123;</div><div class="line">..........(no difference if here is some code or not) ...............</div><div class="line">  [super setAlpha:alpha];</div><div class="line">&#125;</div></pre></td></tr></table></figure><br><br>### 解决：<br><p>根据stackoverflow提供的方法，只需要写一个UIImageView的 category：UIImageView+（UIScrollerView），重写上面的方法即可：</p>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">@implementation UIImageView (UIScrollView)</div><div class="line">- (void)setAlpha:(CGFloat)alpha &#123;</div><div class="line">  [super setAlpha:alpha];</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure>
+                <h3 id="Mark"><a href="#Mark" class="headerlink" title="Mark:"></a>Mark:</h3><blockquote>
+<p>这个问题可能比较多出现，网上呢一股脑的方案是：<font color="red">描述文件，推送证书与项目中的bundle identifer 不一致，或者什么appid不一致呀，什么证书生成顺序不一致呀，什么xcode的code signing没有配置呀</font>，就不写了，网上搜很多，我现在就把自己的问题说一下：</p>
+</blockquote>
+<h3 id="问题背景："><a href="#问题背景：" class="headerlink" title="问题背景："></a>问题背景：</h3><blockquote>
+<p><font color="blue">出现的背景是</font>：原先的项目兼容iOS10，远程推送也用了最新的iOS10的推送框架，创建证书、描述文件的时候的appid，顺序啊，bundle identifer呀都正常</p>
+</blockquote>
+<h3 id="解决方法："><a href="#解决方法：" class="headerlink" title="解决方法："></a>解决方法：</h3><blockquote>
+<p>如果大家谁也出现这个问题了，不要忘记去看看xcode中的一个设置：<br><img src="http://img.blog.csdn.net/20160916150333545" alt="这里写图片描述"><br>就是上图，记得看看打开没打开这个‘Push Notification’开关，打开之后，steps这两步骤会自动检查APP ID等推送文件的合法性。我的项目打开这个开关之后，验证也通过了，再运行，不会出现一开始‘Code=3000 “未找到应用程序的“aps-environment”的授权字符串”’的错误。</p>
+</blockquote>
+<font color="brown">如果这两个step报错，就要去按照网上其他的重新设置provisioning profile，bundle identifer等，让其保持一致性。</font>
 
                 <hr>
                 
 
                 <ul class="pager">
                     
-                    <li class="previous">
-                        <a href="/2016/11/16/Code=3000 _未找到应用程序的“aps-environment”的授权字符串_ 解决办法/" data-toggle="tooltip" data-placement="top"
-                           title="Code=3000 "未找到应用程序的“aps-environment”的授权字符串" 解决办法">&larr; Previous Post</a>
-                    </li>
-                    
                     
                     <li class="next">
-                        <a href="/2016/11/11/iMessage Apps and Stickers, Part 1/" data-toggle="tooltip" data-placement="top"
-                           title="iMessage Apps and Stickers, Part 1">Next Post &rarr;</a>
+                        <a href="/2016/11/15/APP兼容64位之后，UIImageView等控件不显示，图片等内容不显示/" data-toggle="tooltip" data-placement="top"
+                           title="APP兼容64位之后，UIImageView等控件不显示，图片等内容不显示">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
@@ -213,7 +211,7 @@
 
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Mark"><span class="toc-text">Mark:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#推测："><span class="toc-text">推测：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定位问题："><span class="toc-text">定位问题：</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Mark"><span class="toc-text">Mark:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#问题背景："><span class="toc-text">问题背景：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决方法："><span class="toc-text">解决方法：</span></a></li></ol>
                 </div>
             </div>
         </div>
@@ -238,8 +236,8 @@
                         <a class="tag" href="/tags/#iOS"
                            title="iOS">iOS</a>
                         
-                        <a class="tag" href="/tags/#64位"
-                           title="64位">64位</a>
+                        <a class="tag" href="/tags/#aps-environment"
+                           title="aps-environment">aps-environment</a>
                         
                     </div>
                 </section>
