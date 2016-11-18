@@ -18,11 +18,11 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
     <title>
         
-        Code=3000 &quot;未找到应用程序的“aps-environment”的授权字符串&quot; 解决办法｜Roach&#39;s blog
+        iOS 10 获得访问系统 camera、照片库、麦克风、日历等 权限问题｜Roach&#39;s blog
         
     </title>
 
-    <link rel="canonical" href="https://jakajacky.github.io/2016/11/16/Code=3000 _未找到应用程序的“aps-environment”的授权字符串_ 解决办法/">
+    <link rel="canonical" href="https://jakajacky.github.io/2016/11/18/iOS 10 获得访问系统 camera、照片库、麦克风、日历等 权限问题/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -145,21 +145,18 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
                 <div class="post-heading">
-                    <h1>Code=3000 &quot;未找到应用程序的“aps-environment”的授权字符串&quot; 解决办法</h1>
+                    <h1>iOS 10 获得访问系统 camera、照片库、麦克风、日历等 权限问题</h1>
                     
                     <span class="meta">
                          作者 john
                         <span>
-                          日期 2016-11-16
+                          日期 2016-11-18
                          </span>
                     </span>
                     <div class="tags text-center">
                         
                         <a class="tag" href="/tags/#iOS"
                            title="iOS">iOS</a>
-                        
-                        <a class="tag" href="/tags/#aps-environment"
-                           title="aps-environment">aps-environment</a>
                         
                     </div>
                 </div>
@@ -168,7 +165,7 @@
     </div>
     <div class="post-title-haojen">
         <span>
-            Code=3000 "未找到应用程序的“aps-environment”的授权字符串" 解决办法
+            iOS 10 获得访问系统 camera、照片库、麦克风、日历等 权限问题
         </span>
     </div>
 </header>
@@ -179,31 +176,22 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <h3 id="Mark"><a href="#Mark" class="headerlink" title="Mark:"></a>Mark:</h3><blockquote>
-<p>这个问题可能比较多出现，网上呢一股脑的方案是：<font color="red">描述文件，推送证书与项目中的bundle identifer 不一致，或者什么appid不一致呀，什么证书生成顺序不一致呀，什么xcode的code signing没有配置呀</font>，就不写了，网上搜很多，我现在就把自己的问题说一下：</p>
-</blockquote>
-<h3 id="问题背景："><a href="#问题背景：" class="headerlink" title="问题背景："></a>问题背景：</h3><blockquote>
-<p><font color="blue">出现的背景是</font>：原先的项目兼容iOS10，远程推送也用了最新的iOS10的推送框架，创建证书、描述文件的时候的appid，顺序啊，bundle identifer呀都正常</p>
-</blockquote>
-<h3 id="解决方法："><a href="#解决方法：" class="headerlink" title="解决方法："></a>解决方法：</h3><blockquote>
-<p>如果大家谁也出现这个问题了，不要忘记去看看xcode中的一个设置：<br><img src="http://img.blog.csdn.net/20160916150333545" alt="这里写图片描述"><br>就是上图，记得看看打开没打开这个‘Push Notification’开关，打开之后，steps这两步骤会自动检查APP ID等推送文件的合法性。我的项目打开这个开关之后，验证也通过了，再运行，不会出现一开始‘Code=3000 “未找到应用程序的“aps-environment”的授权字符串”’的错误。</p>
-</blockquote>
-<font color="brown">如果这两个step报错，就要去按照网上其他的重新设置provisioning profile，bundle identifer等，让其保持一致性。</font>
+                <h3 id="问题"><a href="#问题" class="headerlink" title="问题:"></a>问题:</h3><p>升级iOS 10之后，如果之前的项目中存在使用系统相机，麦克风，相册，通讯录等，运行APP会出现crash的情况，如下图：<br><img src="http://img.blog.csdn.net/20160913144232419" alt="这里写图片描述"></p>
+<h3 id="解决："><a href="#解决：" class="headerlink" title="解决："></a>解决：</h3><p>按照崩溃的log提示，将对应的key加到工程plist中（以source code方式打开 plist）：<br><img src="http://img.blog.csdn.net/20160913144510220" alt="这里写图片描述"></p>
+<p>或者在 Target -&gt; Info 中添加相应的key-value：<br><img src="http://img.blog.csdn.net/20160913145144419" alt="这里写图片描述"></p>
+<p>这里举几个例子，其他的一些权限，去plist文件中，添加一栏。输入 “Privacy - ”自动列出一串供选择<br>Privacy - Camera Usage Description<br>Privacy - Photo Library Usage Description<br>Privacy - Calendars Usage Description<br>…</p>
+<p>配置完毕，当进入APP，使用相应功能的时候，系统会弹窗提示，提示内容就是上面自定义的 value。</p>
+<p>完结！</p>
 
                 <hr>
                 
 
                 <ul class="pager">
                     
-                    <li class="previous">
-                        <a href="/2016/11/18/iOS 10 获得访问系统 camera、照片库、麦克风、日历等 权限问题/" data-toggle="tooltip" data-placement="top"
-                           title="iOS 10 获得访问系统 camera、照片库、麦克风、日历等 权限问题">&larr; Previous Post</a>
-                    </li>
-                    
                     
                     <li class="next">
-                        <a href="/2016/11/15/APP兼容64位之后，UIImageView等控件不显示，图片等内容不显示/" data-toggle="tooltip" data-placement="top"
-                           title="APP兼容64位之后，UIImageView等控件不显示，图片等内容不显示">Next Post &rarr;</a>
+                        <a href="/2016/11/16/Code=3000 _未找到应用程序的“aps-environment”的授权字符串_ 解决办法/" data-toggle="tooltip" data-placement="top"
+                           title="Code=3000 "未找到应用程序的“aps-environment”的授权字符串" 解决办法">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
@@ -216,7 +204,7 @@
 
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Mark"><span class="toc-text">Mark:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#问题背景："><span class="toc-text">问题背景：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决方法："><span class="toc-text">解决方法：</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#问题"><span class="toc-text">问题:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决："><span class="toc-text">解决：</span></a></li></ol>
                 </div>
             </div>
         </div>
@@ -240,9 +228,6 @@
                         
                         <a class="tag" href="/tags/#iOS"
                            title="iOS">iOS</a>
-                        
-                        <a class="tag" href="/tags/#aps-environment"
-                           title="aps-environment">aps-environment</a>
                         
                     </div>
                 </section>
