@@ -18,11 +18,11 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
     <title>
         
-        Roach&#39;s blog
+        iOS应用之间跳转 报错：This app is not allowed to query for scheme｜Roach&#39;s blog
         
     </title>
 
-    <link rel="canonical" href="https://jakajacky.github.io/tags/波浪动画/">
+    <link rel="canonical" href="https://jakajacky.github.io/2016/11/23/iOS应用之间跳转 报错：_This app is not allowed to query for scheme ____/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -43,7 +43,7 @@
 <!-- hack iOS CSS :active style -->
 <body ontouchstart="" class="animated fadeIn">
 <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "false" data-istags="true
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
 " data-ishome = "false" >
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -123,6 +123,132 @@
 </script>
 
 <!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="/images/post-default.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('/images/post-default.jpg')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>iOS应用之间跳转 报错：This app is not allowed to query for scheme</h1>
+                    
+                    <span class="meta">
+                         作者 john
+                        <span>
+                          日期 2016-11-23
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#iOS"
+                           title="iOS">iOS</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            iOS应用之间跳转 报错：This app is not allowed to query for scheme
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h3 id="Mark："><a href="#Mark：" class="headerlink" title="Mark："></a>Mark：</h3><p>关于应用之间跳转，核心代码是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[[UIApplication sharedApplication] openURL:url]</div></pre></td></tr></table></figure>
+<p>但是在试图打开这个url之前，应该先<font color="blue">判断</font>一下设备上是否安装了该url对应的APP，如果存在，打开APP，如果不存在，则做出相应处理：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">BOOL isExist = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@&quot;iosamap://&quot;]]</div></pre></td></tr></table></figure>
+<h3 id="Question："><a href="#Question：" class="headerlink" title="Question："></a>Question：</h3><p>问题是 这个方法出现的如下错误：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-canOpenURL: failed for URL: &quot;iosamap://&quot; - error: &quot;This app is not allowed to query for scheme iosamap&quot;</div></pre></td></tr></table></figure>
+<p>根据错误日志，我们且翻译成：<font color="red">当前APP不被允许调用iosamap这个scheme</font></p>
+<h3 id="Solution："><a href="#Solution：" class="headerlink" title="Solution："></a>Solution：</h3><p>所以我们引入 白名单 的概念，在项目的<font color="blue">info.plist</font>文件中，添加scheme白名单：</p>
+<p><img src="http://img.blog.csdn.net/20161123110603497" alt="这里写图片描述"></p>
+<p>好了，问题解决</p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    
+                    <li class="next">
+                        <a href="/2016/11/18/iOS 10 获得访问系统 camera、照片库、麦克风、日历等 权限问题/" data-toggle="tooltip" data-placement="top"
+                           title="iOS 10 获得访问系统 camera、照片库、麦克风、日历等 权限问题">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Mark："><span class="toc-text">Mark：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Question："><span class="toc-text">Question：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Solution："><span class="toc-text">Solution：</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#iOS"
+                           title="iOS">iOS</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
 
 <!-- Footer -->
 <!-- Footer -->
