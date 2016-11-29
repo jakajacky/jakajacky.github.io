@@ -3,787 +3,675 @@
 
 <!-- Head tag -->
 <head>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="iOSのcoder">
-    <meta name="keyword" content="undefined">
-    <meta name="theme-color" content="#600090">
-    <meta name="msapplication-navbutton-color" content="#600090">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
-    <link rel="shortcut icon" href="/images/123.png">
-    <link rel="alternate" type="application/atom+xml" title="Roach" href="/atom.xml">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
-    <title>
-        
-        Roach&#39;s blog
-        
-    </title>
 
-    <link rel="canonical" href="https://jakajacky.github.io/">
+    <!--Description-->
+    
+        <meta name="description" content="iOSのcoder">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="John">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Roach"/>
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="iOSのcoder" />
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="Roach"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="website" />
+    
+
+    <!--Page Cover-->
+    
+
+    <meta name="twitter:card" content="summary" />
+    
+
+    <!-- Title -->
+    
+    <title>Roach</title>
 
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet" />
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/blog-style.css">
+    <link rel="stylesheet" href="/css/style.css">
 
-    <!-- Pygments Github CSS -->
-    <link rel="stylesheet" href="/css/syntax.css">
+    <!-- Google Analytics -->
+    
+
+
 </head>
 
-<style>
 
-    header.intro-header {
-        background-image: url('/images/about-bg.jpg')
-    }
-</style>
-<!-- hack iOS CSS :active style -->
-<body ontouchstart="" class="animated fadeIn">
-<!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "false" data-istags="false
-" data-ishome = "true" >
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand animated pulse" href="/">
-                <span class="brand-logo">
-                    Roach
-                </span>
-                's Blog
-            </a>
-        </div>
+<body>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <!-- Known Issue, found by Hux:
-            <nav>'s height woule be hold on by its content.
-            so, when navbar scale out, the <nav> will cover tags.
-            also mask any touch event of tags, unfortunately.
-        -->
-        <!-- /.navbar-collapse -->
-        <div id="huxblog_navbar">
-            <div class="navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="/">Home</a>
-                    </li>
-					
-                    
-                        
-							
-                        <li>
-                            <a href="/tags/">tags</a>
-                        </li>
-							
-						
-                    
-					
-					
-                </ul>
-            </div>
-        </div>
+<div class="bg-gradient"></div>
+<div class="bg-pattern"></div>
+
+<!-- Menu -->
+<!--Menu Links and Overlay-->
+<div class="menu-bg">
+    <div class="menu-container">
+        <ul>
+            
+            <li class="menu-item">
+                <a href="/">
+                    Home
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/archives">
+                    Archives
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/about.html">
+                    About
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/contact.html">
+                    Contact
+                </a>
+            </li>
+            
+        </ul>
     </div>
-    <!-- /.container -->
+</div>
+
+<!--Hamburger Icon-->
+<nav>
+    <a href="#menu"></a>
 </nav>
-<script>
-    // Drop Bootstarp low-performance Navbar
-    // Use customize navbar with high-quality material design animation
-    // in high-perf jank-free CSS3 implementation
-//    var $body   = document.body;
-    var $toggle = document.querySelector('.navbar-toggle');
-    var $navbar = document.querySelector('#huxblog_navbar');
-    var $collapse = document.querySelector('.navbar-collapse');
 
-    $toggle.addEventListener('click', handleMagic)
-    function handleMagic(e){
-        if ($navbar.className.indexOf('in') > 0) {
-        // CLOSE
-            $navbar.className = " ";
-            // wait until animation end.
-            setTimeout(function(){
-                // prevent frequently toggle
-                if($navbar.className.indexOf('in') < 0) {
-                    $collapse.style.height = "0px"
-                }
-            },400)
-        }else{
-        // OPEN
-            $collapse.style.height = "auto"
-            $navbar.className += " in";
-        }
-    }
-</script>
+<div class="container">
 
-<!-- Main Content -->
-
-
-<style>
-
-    .custom-haojen-container .post-preview:nth-of-type(1),
-    .custom-haojen-container .post-preview-poetry:nth-of-type(1) {
-        text-align: center;
-        background-repeat: no-repeat;
-        border-radius: 3px;
-        background-size: cover;
-        padding: 0;
-        height: 300px;
-        display: table;
-        width: 100%;
-        background-color: rgba(0, 0, 0, 0.16);
-    }
-
-    /*去掉诗歌的背景图片*/
-    .custom-haojen-container .post-preview-poetry:nth-of-type(1) {
-        background-image: none !important;
-        background-color: rgba(255, 248, 220, 0.5);
-    }
-
-    .custom-haojen-container .post-preview:nth-child(1) h2,
-    .custom-haojen-container .post-preview:nth-child(1) .post-meta,
-    .custom-haojen-container .post-preview:nth-child(1) .post-subtitle {
-        text-shadow: 0 0 40px rgba(0, 0, 0, 1);
-        letter-spacing: 1px;
-        color: #fff;
-        margin-top: 0;
-        padding-left: 60px;
-        padding-right: 60px;
-    }
-
-    .custom-haojen-container .post-preview:nth-child(1) .post-meta {
-        font-size: .9em;
-        font-weight: 300;
-        margin-top: 0;
-    }
-
-    .custom-haojen-container .post-preview-poetry:nth-child(1) .post-subtitle {
-        letter-spacing: 6px;
-        font-size: 18px;
-        font-family: unset;
-        font-weight: 400;
-        color: rgba(0, 0, 0, .75)
-    }
-
-    /*不显示摘要*/
-    .custom-haojen-container .post-preview:nth-child(1) .post-content-preview {
-        display: none
-    }
-
-    /*只第一个显示背景图片*/
-    .custom-haojen-container .post-preview:not(:nth-child(1)) {
-        background-image: none !important;
-    }
-
-    /*第一个分界线去掉*/
-    .custom-haojen-container hr:nth-of-type(1) {
-        display: none;
-    }
-
-    /*主题*/
-    .custom-haojen-container .post-preview:nth-of-type(1) > a {
-        display: table-cell;
-        vertical-align: middle;
-    }
-
-    /*诗词标题*/
-    .custom-haojen-container .post-preview-poetry:nth-child(1) h2 {
-        font-size: 35px;
-        font-family: STKaiti;
-        color: rgba(0, 0, 0, .8);
-    }
-
-    .custom-haojen-container .post-preview-poetry:nth-of-type(1) .post-meta {
-        color: #0e2231;
-    }
-
-    @media (max-width: 768px) {
-        .custom-haojen-container .post-preview:nth-child(1) {
-            height: 240px;
-        }
-
-        .custom-haojen-container .post-preview-poetry:nth-child(1) h2 {
-            font-size: 28px !important;
-            margin-top: 0;
-        }
-
-        .custom-haojen-container .post-preview:nth-child(1) .post-subtitle {
-            font-size: 18px;
-            font-weight: 400;
-            padding-left: 0;
-            padding-right: 0;
-        }
-
-        .custom-haojen-container .post-preview:nth-of-type(1) > a {
-            padding: 20px
-        }
-    }
-
-    /*手机屏幕*/
-    @media (max-width: 400px) {
-        .custom-haojen-container .post-preview:nth-child(1) {
-            height: 195px;
-        }
-
-        .custom-haojen-container .post-preview-poetry:nth-child(1) h2 {
-            font-size: 20px !important;
-        }
-
-        .custom-haojen-container .post-preview:nth-child(1) .post-subtitle {
-            font-size: 16px;
-        }
-
-        .custom-haojen-container .post-preview:nth-child(1) a {
-            padding: 30px 20px;
-        }
-    }
-</style>
-
-<!-- Page Header -->
-<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 visible-xs-block visible-sm-block">
+    <!-- Main Content -->
     <div class="row">
-        <header class="intro-header">
-            <div class="container">
-                <div class="site-heading text-center">
-                    <div class="about-me">
-                        <!--移动端头部显示-->
-                        <img src="/images/avatar_cat.jpg"/>
-                        <h5><a href="/about/">John</a></h5>
-                        <p>iOSのcoder</p>
-                    </div>
-                </div>
+    <div class="col-sm-12">
+
+        <!--Title and Logo-->
+        <header>
+    <div class="logo">
+        <a href="/"><i class="logo-icon fa fa-cube" aria-hidden="true"></i></a>
+        
+            <h1 id="main-title" class="title">Roach</h1>
+        
+    </div>
+</header>
+
+        <section class="main">
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2016/11/29/CLLocationManager定位坐标不准确问题以及WGS_84转GCJ_02坐标位置纠错的方法/">
+                CLLocationManager定位坐标不准确问题以及WGS_84转GCJ_02坐标位置纠错的方法
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2016-11-29</span>
+            
+            
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <h2 id="背景："><a href="#背景：" class="headerlink" title="背景："></a>背景：</h2><p>  最近用高德的一个基于web的URI地图路径规划及导航模块，以实现根据起始坐标 实现路径规划，<a href="http://lbs.amap.com/api/uri-api/guide/mobile-web/route-plan/" target="_blank" rel="external">见此处</a>  </p>
+<p>  起点是当前位置，由于没有集成高德API，所以用系统的CLLocationManager实现定位。</p>
+<h2 id="问题："><a href="#问题：" class="headerlink" title="问题："></a>问题：</h2><p>  但是实际上，CLLocationManager定位的坐标，在高德地图上标注的位置与实际地点有偏差，并且较大！以前知道不同的地图坐标不能直接通用，但是如我所知，Apple的地图也是基于高德的，为什么CLLocationManager定位出的不准确，而MKMapView的定位却是准确的呢？</p>
+<h2 id="原因："><a href="#原因：" class="headerlink" title="原因："></a>原因：</h2><p>  是这样的，按照国家统一的保密要求，任何一个地图产品都不允许使用GPS坐标，国内地图使用的坐标系统是<font color="green">GCJ-02</font>。<font size="2" color="blue">GCJ-02，国测局02年发布的坐标体系。又称“火星坐标”。</font>在中国，必须<font color="red">至少使用</font>GCJ-02的坐标体系。比如<font color="red">谷歌</font>，<font color="red">腾讯</font>，<font color="red">高德</font>都在用这个坐标体系。<br>  国内其他坐标体系。一般都是由GCJ-02进过偏移算法得到的。这种体系就根据每个公司的不同，坐标体系都不一样了。比如，<font color="red">百度和搜狗</font>就使用自己的坐标体系，与其他坐标体系不兼容。百度（BD_09坐标）<br>  到这里大家可能都猜出了CLLocationManager有偏差，是因为采用的是<font color="brown">WGS-84</font>，也就是GPS原始坐标；<br>  Apple的MKMapView框架准确，是因为 老乔想进中国，就得按规矩来咯，所以iOS中的地图理所应当将<font color="brown">WGS-84</font>坐标转成了国内<font color="green">GCJ-02</font>坐标;</p>
+<h2 id="解决："><a href="#解决：" class="headerlink" title="解决："></a>解决：</h2><h3 id="思路一："><a href="#思路一：" class="headerlink" title="思路一："></a>思路一：</h3><p>  使用现有API转换，将CLLocationManager的WGS_84坐标转成GCJ_02坐标，调用apple的私有模块类<font color="brown">MKLocationManager</font>中得方法来对经纬度做一个偏移修正</p>
+<p><font color="red">问题：但是如此使用会审核被拒，而且iOS 5之后，这个方法已经不再使用。</font></p>
+<h3 id="思路二："><a href="#思路二：" class="headerlink" title="思路二："></a>思路二：</h3><p>  既然MKMapView地图中的定位是准确的，那么用[self.mapView setShowsUserLocation:YES]得了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">-(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation &#123;</div><div class="line">  CLLocationCoordinate2D coord = [userLocation coordinate];</div><div class="line">  NSLog(@&quot;经度:%f,纬度:%f&quot;,coord.latitude,coord.longitude);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><font color="red">不足：需要将mapView加到父视图上，不然不会调用上面的代理方法，当然了，可以设置为hidden=YES，也是个办法</font></p>
+<h3 id="思路三："><a href="#思路三：" class="headerlink" title="思路三："></a>思路三：</h3><p>  使用算法，对得到的WGS_84坐标处理，得到GCJ_02坐标</p>
+<p><font size="2" color="grag">听闻是为了国家安全搞的加密措施，使用的是非线性的偏移值，想得到真实的数据，得同GCJ申请，交钱，才能得到解密方法。不过高手在民间啊，被人破解了,具体<a href="https://wuyongzheng.wordpress.com/2010/01/22/china-map-deviation-as-a-regression-problem/" target="_blank" rel="external">算法分析可以看这篇文章</a></font></p>
+<p><font color="red">这个算法网上是有的，具体出自谁不清楚，还是要感谢并参考一下，下面贴出位置纠错算法的OC代码：新建一个继承NSObject的类</font></p><br>WGS84ConvertToGCJ02.h 文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">#import &lt;Foundation/Foundation.h&gt;</div><div class="line">#import &lt;MapKit/MapKit.h&gt;</div><div class="line"></div><div class="line">@interface WGS84ConvertToGCJ02ForAMapView : NSObject</div><div class="line">//判断是否已经超出中国范围</div><div class="line">+(BOOL)isLocationOutOfChina:(CLLocationCoordinate2D)location;</div><div class="line">//转GCJ-02</div><div class="line">+(CLLocationCoordinate2D)transformFromWGSToGCJ:(CLLocationCoordinate2D)wgsLoc;</div><div class="line">@end</div></pre></td></tr></table></figure><br><br>WGS84ConvertToGCJ02.m文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line">#import &quot;WGS84ConvertToGCJ02ForAMapView.h&quot;</div><div class="line"></div><div class="line">const double a = 6378245.0;</div><div class="line">const double ee = 0.00669342162296594323;</div><div class="line"></div><div class="line">@implementation WGS84ConvertToGCJ02ForAMapView</div><div class="line"></div><div class="line">+(CLLocationCoordinate2D)transformFromWGSToGCJ:(CLLocationCoordinate2D)wgsLoc</div><div class="line">&#123;</div><div class="line">  CLLocationCoordinate2D adjustLoc;</div><div class="line">  if([self isLocationOutOfChina:wgsLoc])&#123;</div><div class="line">    adjustLoc = wgsLoc;</div><div class="line">  &#125;else&#123;</div><div class="line">    double adjustLat = [self transformLatWithX:wgsLoc.longitude - 105.0 withY:wgsLoc.latitude - 35.0];</div><div class="line">    double adjustLon = [self transformLonWithX:wgsLoc.longitude - 105.0 withY:wgsLoc.latitude - 35.0];</div><div class="line">    double radLat = wgsLoc.latitude / 180.0 * M_PI;</div><div class="line">    double magic = sin(radLat);</div><div class="line">    magic = 1 - ee * magic * magic;</div><div class="line">    double sqrtMagic = sqrt(magic);</div><div class="line">    adjustLat = (adjustLat * 180.0) / ((a * (1 - ee)) / (magic * sqrtMagic) * M_PI);</div><div class="line">    adjustLon = (adjustLon * 180.0) / (a / sqrtMagic * cos(radLat) * M_PI);</div><div class="line">    adjustLoc.latitude = wgsLoc.latitude + adjustLat - 0.00039900; // 减去这个数字 完全是凑数，准确性有待验证</div><div class="line">    adjustLoc.longitude = wgsLoc.longitude + adjustLon;</div><div class="line">  &#125;</div><div class="line">  return adjustLoc;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//判断是不是在中国</div><div class="line">+(BOOL)isLocationOutOfChina:(CLLocationCoordinate2D)location</div><div class="line">&#123;</div><div class="line">  if (location.longitude &lt; 72.004 || location.longitude &gt; 137.8347 || location.latitude &lt; 0.8293 || location.latitude &gt; 55.8271)</div><div class="line">    return YES;</div><div class="line">  return NO;</div><div class="line">&#125;</div><div class="line"></div><div class="line">+(double)transformLatWithX:(double)x withY:(double)y</div><div class="line">&#123;</div><div class="line">  double lat = -100.0 + 2.0 * x + 3.0 * y + 0.2 * y * y + 0.1 * x * y + 0.2 * sqrt(fabs(x));</div><div class="line">  lat += (20.0 * sin(6.0 * x * M_PI) + 20.0 *sin(2.0 * x * M_PI)) * 2.0 / 3.0;</div><div class="line">  lat += (20.0 * sin(y * M_PI) + 40.0 * sin(y / 3.0 * M_PI)) * 2.0 / 3.0;</div><div class="line">  lat += (160.0 * sin(y / 12.0 * M_PI) + 320 * sin(y * M_PI / 30.0)) * 2.0 / 3.0;</div><div class="line">  return lat;</div><div class="line">&#125;</div><div class="line"></div><div class="line">+(double)transformLonWithX:(double)x withY:(double)y</div><div class="line">&#123;</div><div class="line">  double lon = 300.0 + x + 2.0 * y + 0.1 * x * x + 0.1 * x * y + 0.1 * sqrt(fabs(x));</div><div class="line">  lon += (20.0 * sin(6.0 * x * M_PI) + 20.0 * sin(2.0 * x * M_PI)) * 2.0 / 3.0;</div><div class="line">  lon += (20.0 * sin(x * M_PI) + 40.0 * sin(x / 3.0 * M_PI)) * 2.0 / 3.0;</div><div class="line">  lon += (150.0 * sin(x / 12.0 * M_PI) + 300.0 * sin(x / 30.0 * M_PI)) * 2.0 / 3.0;</div><div class="line">  return lon;</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure><br><br><p>以我的项目为例，在CLLocationManager的定位代理方法中这样使用：</p>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">#pragma mark -</div><div class="line">#pragma mark CLLocationManagerDelegate</div><div class="line">- (void)locationManager:(CLLocationManager *)manager</div><div class="line">     didUpdateLocations:(NSArray *)locations</div><div class="line">&#123;</div><div class="line">  CLLocation *newLocation = [locations firstObject];</div><div class="line">  //判断是不是属于国内范围</div><div class="line">  if (![WGS84ConvertToGCJ02ForAMapView isLocationOutOfChina:[newLocation coordinate]]) &#123;</div><div class="line">    //转换后的coord</div><div class="line">    CLLocationCoordinate2D coord = [WGS84ConvertToGCJ02ForAMapView transformFromWGSToGCJ:[newLocation coordinate]];</div><div class="line">    newLocation = [[CLLocation alloc] initWithLatitude:coord.latitude longitude:coord.longitude];</div><div class="line">  &#125;</div><div class="line">  if (_location) &#123;</div><div class="line">    if (newLocation.horizontalAccuracy &lt; _location.horizontalAccuracy) &#123;</div><div class="line">      _location = newLocation;</div><div class="line">      [self postLocationNotificationOnMainThreadWithName:GPSManagerUpdateLocationNotification];</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  else&#123;</div><div class="line">    _location = newLocation;</div><div class="line">    [self postLocationNotificationOnMainThreadWithName:GPSManagerUpdateLocationNotification];</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><font color="red">不足：毕竟不是正统解密算法，还是会有偏差，大概10+m，但是精度已经很高了。</font></p>
+
+<h2 id="位置纠错算法的OC代码源文件"><a href="#位置纠错算法的OC代码源文件" class="headerlink" title="位置纠错算法的OC代码源文件"></a>位置纠错算法的OC代码源文件</h2><p><a href="https://github.com/jakajacky/WGS84--GCJ02" target="_blank" rel="external">下载地址</a></p>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2016/11/23/iOS应用之间跳转 报错：_This app is not allowed to query for scheme ____/">
+                iOS应用之间跳转 报错：This app is not allowed to query for scheme
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2016-11-23</span>
+            
+            
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <h3 id="Mark："><a href="#Mark：" class="headerlink" title="Mark："></a>Mark：</h3><p>关于应用之间跳转，核心代码是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[[UIApplication sharedApplication] openURL:url]</div></pre></td></tr></table></figure>
+<p>但是在试图打开这个url之前，应该先<font color="blue">判断</font>一下设备上是否安装了该url对应的APP，如果存在，打开APP，如果不存在，则做出相应处理：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">BOOL isExist = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@&quot;iosamap://&quot;]]</div></pre></td></tr></table></figure>
+<h3 id="Question："><a href="#Question：" class="headerlink" title="Question："></a>Question：</h3><p>问题是 这个方法出现的如下错误：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-canOpenURL: failed for URL: &quot;iosamap://&quot; - error: &quot;This app is not allowed to query for scheme iosamap&quot;</div></pre></td></tr></table></figure>
+<p>根据错误日志，我们且翻译成：<font color="red">当前APP不被允许调用iosamap这个scheme</font></p>
+<h3 id="Solution："><a href="#Solution：" class="headerlink" title="Solution："></a>Solution：</h3><p>所以我们引入 白名单 的概念，在项目的<font color="blue">info.plist</font>文件中，添加scheme白名单：</p>
+<p><img src="http://img.blog.csdn.net/20161123110603497" alt="这里写图片描述"></p>
+<p>好了，问题解决</p>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2016/11/18/iOS 10 获得访问系统 camera、照片库、麦克风、日历等 权限问题/">
+                iOS 10 获得访问系统 camera、照片库、麦克风、日历等 权限问题
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2016-11-18</span>
+            
+            
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <h3 id="问题"><a href="#问题" class="headerlink" title="问题:"></a>问题:</h3><p>升级iOS 10之后，如果之前的项目中存在使用系统相机，麦克风，相册，通讯录等，运行APP会出现crash的情况，如下图：<br><img src="http://img.blog.csdn.net/20160913144232419" alt="这里写图片描述"></p>
+<h3 id="解决："><a href="#解决：" class="headerlink" title="解决："></a>解决：</h3><p>按照崩溃的log提示，将对应的key加到工程plist中（以source code方式打开 plist）：<br><img src="http://img.blog.csdn.net/20160913144510220" alt="这里写图片描述"></p>
+<p>或者在 Target -&gt; Info 中添加相应的key-value：<br><img src="http://img.blog.csdn.net/20160913145144419" alt="这里写图片描述"></p>
+<p>这里举几个例子，其他的一些权限，去plist文件中，添加一栏。输入 “Privacy - ”自动列出一串供选择<br>Privacy - Camera Usage Description<br>Privacy - Photo Library Usage Description<br>Privacy - Calendars Usage Description<br>…</p>
+<p>配置完毕，当进入APP，使用相应功能的时候，系统会弹窗提示，提示内容就是上面自定义的 value。</p>
+<p>完结！</p>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2016/11/16/Code=3000 _未找到应用程序的“aps-environment”的授权字符串_ 解决办法/">
+                Code=3000 "未找到应用程序的“aps-environment”的授权字符串" 解决办法
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2016-11-16</span>
+            
+            
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <h3 id="Mark"><a href="#Mark" class="headerlink" title="Mark:"></a>Mark:</h3><blockquote>
+<p>这个问题可能比较多出现，网上呢一股脑的方案是：<font color="red">描述文件，推送证书与项目中的bundle identifer 不一致，或者什么appid不一致呀，什么证书生成顺序不一致呀，什么xcode的code signing没有配置呀</font>，就不写了，网上搜很多，我现在就把自己的问题说一下：</p>
+</blockquote>
+<h3 id="问题背景："><a href="#问题背景：" class="headerlink" title="问题背景："></a>问题背景：</h3><blockquote>
+<p><font color="blue">出现的背景是</font>：原先的项目兼容iOS10，远程推送也用了最新的iOS10的推送框架，创建证书、描述文件的时候的appid，顺序啊，bundle identifer呀都正常</p>
+</blockquote>
+<h3 id="解决方法："><a href="#解决方法：" class="headerlink" title="解决方法："></a>解决方法：</h3><blockquote>
+<p>如果大家谁也出现这个问题了，不要忘记去看看xcode中的一个设置：<br><img src="http://img.blog.csdn.net/20160916150333545" alt="这里写图片描述"><br>就是上图，记得看看打开没打开这个‘Push Notification’开关，打开之后，steps这两步骤会自动检查APP ID等推送文件的合法性。我的项目打开这个开关之后，验证也通过了，再运行，不会出现一开始‘Code=3000 “未找到应用程序的“aps-environment”的授权字符串”’的错误。</p>
+</blockquote>
+<font color="brown">如果这两个step报错，就要去按照网上其他的重新设置provisioning profile，bundle identifer等，让其保持一致性。</font>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2016/11/15/APP兼容64位之后，UIImageView等控件不显示，图片等内容不显示/">
+                APP兼容64位之后，UIImageView等控件不显示，图片等内容不显示
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2016-11-15</span>
+            
+            
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <h3 id="Mark"><a href="#Mark" class="headerlink" title="Mark:"></a>Mark:</h3><p>距离上次给一个APP升级 兼容64位 过去很长时间了，今天又遇到一个，本来觉得很easy的，更新sqlcipher、jsonkit、不合适的静态库就好了，具体见我<a href="http://blog.csdn.net/u010731949/article/details/52457548" target="_blank" rel="external">另一篇</a></p><br>### 诡异问题：<br><p>但是问题来了，所有配置工作做好了，也跑起来了，但是APP里的内容呢？word哥！！！空白一片，按钮不见了，图片不见了，，，各种控件不见了。<font color="red">但是诡异也很关键的是：空白处有响应事件的按钮，cell都可以点击</font></p>
+
+<h3 id="推测："><a href="#推测：" class="headerlink" title="推测："></a>推测：</h3><p>那么内容不显示，但是事件可以点击，是不是很像我们经常处理的<font color="red">alpha=0</font>的情况？我检查N遍，并没有设置任何控件alpha=0，但是别忘了，alpha值是CGFloat类型，而我在<font color="red">Xcode警告栏</font>里发现了修改为64位之后<font color="red">N多个警告</font>，例如：<font color="red">Implicit conversion loses integer precision：‘NSInteger’ to ‘int’</font>或者是<font color="red">‘CGFloat’to ‘float’</font>诸如此类。</p><br><p>那么会不会是alpha值由于‘CGFloat’to ‘float’失败，而<font color="blue">导致默认设置alpha=1失败，变成了alpha=0呢？</font></p>
+
+<h3 id="定位问题："><a href="#定位问题：" class="headerlink" title="定位问题："></a>定位问题：</h3><p>终于在<a href="http://stackoverflow.com/questions/20855176/images-not-showing-up-when-architecture-set-to-64-bit" target="_blank" rel="external">这里</a>找到了答案</p><br><p>大概意思就是，下面这个不再适用于64位，需要将<font color="red">float</font>改为<font color="red">CGFloat</font>,也证实了我的猜想</p><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">- (void)setAlpha:(float)alpha &#123;</div><div class="line">..........(no difference if here is some code or not) ...............</div><div class="line">  [super setAlpha:alpha];</div><div class="line">&#125;</div></pre></td></tr></table></figure><br><br>### 解决：<br><p>根据stackoverflow提供的方法，只需要写一个UIImageView的 category：UIImageView+（UIScrollerView），重写上面的方法即可：</p>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">@implementation UIImageView (UIScrollView)</div><div class="line">- (void)setAlpha:(CGFloat)alpha &#123;</div><div class="line">  [super setAlpha:alpha];</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2016/11/11/iMessage Apps and Stickers, Part 1/">
+                iMessage Apps and Stickers, Part 1
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2016-11-11</span>
+            
+            
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <h2 id="Mark"><a href="#Mark" class="headerlink" title="Mark:"></a>Mark:</h2><p>iOS10的一大魅力所在，iMessage extension，也就是说我们可以扩展APP，使之在iMessage界面，也能被访问，并作出相应的操作；</p>
+
+<h2 id="iMessage分为两类"><a href="#iMessage分为两类" class="headerlink" title="iMessage分为两类:"></a>iMessage分为两类:</h2><h3 id="1、Stickers-Pack-Application"><a href="#1、Stickers-Pack-Application" class="headerlink" title="1、Stickers Pack Application"></a>1、Stickers Pack Application</h3><p>2、iMessage Application</p>
+
+<p>当然这两种都能够以其他APP作为container，通过创建Stickers Pack Extension、iMessage Extension来实现对其他已有APP的extension扩展功能。</p><br><img src="http://img.blog.csdn.net/20160917104503511" alt="这里写图片描述"><br><p>例如上图中，<br>”音乐、Evernote、WPS“是属于 iMessage Extension：因为它们以原来的APP作为container，iMessage中只是container的一个扩展功能；<br>”LU HAN、TFBoys“是属于Sticker Pack Application：因为它们是独立的贴纸应用，切不需要自定义功能；<br>”最近搜索“是属于iMessage Application：因为它不仅不依赖container，而且还自定义了功能–统计近期的数据。</p>
+
+<p>这篇文章主要讲的是iMessage Stickers Application，它不以其他APP为container，是一个独立的，只存在于iMessage store中，不存在与桌面上的APP，提供message的发送贴纸功能：例如鹿晗表情包等。</p>
+
+<p></p><p>其实这是最简单的iMessage APP了，正如<a href="https://developer.apple.com/videos/play/wwdc2016/204/" target="_blank" rel="external">WWDC 2016</a>中说的，我们不需要写任何代码，只需要往Stickers.xcstickers中设置合适的Sticker Pack和iMessage App Icon即可：</p><p></p>
+<h4 id="step-1-创建Sticker-Pack-Application工程"><a href="#step-1-创建Sticker-Pack-Application工程" class="headerlink" title="step 1: 创建Sticker Pack Application工程"></a><font color="red">step 1: </font>创建Sticker Pack Application工程</h4><p><img src="http://img.blog.csdn.net/20160917110436116" alt="这里写图片描述"></p>
+<h4 id="step-2-向Sticker-Pack中添加贴纸；向iMessage-App-Icon中添加Icon，用于在iMessage-Store中显示。"><a href="#step-2-向Sticker-Pack中添加贴纸；向iMessage-App-Icon中添加Icon，用于在iMessage-Store中显示。" class="headerlink" title="step 2:向Sticker Pack中添加贴纸；向iMessage App Icon中添加Icon，用于在iMessage Store中显示。"></a><font color="red">step 2:</font>向Sticker Pack中添加贴纸；向iMessage App Icon中添加Icon，用于在iMessage Store中显示。</h4><p><img src="http://img.blog.csdn.net/20160917110732277" alt="这里写图片描述"></p>
+<blockquote>
+<p>关于这两栏的内容格式要求：</p>
+<p><font color="red">—Sticker Pack中的内容：</font><br>1、图片类型必须是 png、apng、gif或者jpeg（Apple推荐使用png和apng格式）<br>2、文件大小必须 小于500K<br>3、图片大小必须在 100100 到 206206 之间<br>4、需要注意的是：必须要永远提供 @3x 大小的图片(即 300300 到 618618)。系统可以根据当前设备通过 runtime 自动调整图片来呈现 @2x 和 @1x<br>5、系统能够自适应的展示贴纸，所以为了更好的展示贴纸，最好提供的贴纸是以下三种大小的类型</p>
+<p><font color="red">小型 100*100</font> </p>
+<p><font color="red">中型 136*136</font></p>
+<p><font color="red">大型 206*206</font><br>我们需要按照它要求的大小，放置图片：<br><img src="http://img.blog.csdn.net/20160917112731834" alt="这里写图片描述"><br>按照上述要求，放置合适的@3x图片即可，当然，根据图片的大小，会占据cell的相应比例，其余部分为空白；</p>
+<p><font color="red">—iMessage App Icon中的内容：</font><br>与普通Icon不同的是，这里面有两类icon：iPhone&amp;iPad setting icon和Message iPhone&amp;iPad icon，后者是用于iMessage Store中的应用图标，呈椭圆状；<br><img src="http://img.blog.csdn.net/20160917112428658" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20160917112519676" alt="这里写图片描述"><br>按照要求放置大小applicable的图片，如果报错：<br><img src="http://img.blog.csdn.net/20160917113708784" alt="这里写图片描述"><br>仔细检查图片的大小格式等问题；</p>
+<h4 id="step-3-运行工程，去iMessage里找就行了，大功告成！"><a href="#step-3-运行工程，去iMessage里找就行了，大功告成！" class="headerlink" title="step 3:运行工程，去iMessage里找就行了，大功告成！"></a><font color="red">step 3:</font>运行工程，去iMessage里找就行了，大功告成！</h4></blockquote>
+<p>如果大家遇到图片资源不合格，导致报错、警告等问题，可以参考demo：<br><a href="https://github.com/jakajacky/iMessage-Stickers.git" target="_blank" rel="external">github</a></p>
+<p>如果想做动态图，可参考下面的demo，用的是apng图片：<br><a href="https://github.com/jakajacky/iMessage-Stickers3" target="_blank" rel="external">github</a><br>里面有一些图片资源可以参考大小、命名。<br>马上会写一篇Part 2，关于custom iMessage App的详解，敬请期待</p>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2016/11/10/Xcode中自定义TODO-、FIXME-、cd-Users-xqzh-hexo-source-posts-clear-pwd-、-等自定义标签警告/">
+                Xcode中自定义TODO 、FIXME 、!!! 、???等自定义标签警告
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2016-11-10</span>
+            
+            
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <h3 id="目前可用的标签"><a href="#目前可用的标签" class="headerlink" title="目前可用的标签"></a>目前可用的标签</h3><p><font color="red">// TODO:</font>标识将来要完成的内容；</p>
+<p><font color="red">// FIXME:</font>标识以后要修正或完善的内容。</p>
+<p><font color="red">// ???:</font>疑问的地方</p>
+<p><font color="red">// !!!:</font>需要注意的地方</p>
+<p>以上四个提示xcode已经支持。</p>
+
+<h3 id="可自定义的标签"><a href="#可自定义的标签" class="headerlink" title="可自定义的标签"></a>可自定义的标签</h3><p></p><p>添加自定义的标识，并在编译时，在warning中显示出来:</p>
+<p><font color="red">target</font>–&gt;<font color="red">build phases</font>–&gt;<font color="red">editor（就是‘+’号）</font>–&gt;<font color="red">add run script build phases</font><br></p><p></p>
+<p></p><p>把下面的代码粘贴到shell框中</p><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">KEYWORDS=&quot;TODO:|FIXME:|???:|!!!:|XXX:&quot;</div><div class="line">find &quot;$&#123;SRCROOT&#125;&quot; −name&quot;∗.h&quot;−or−name&quot;∗.m&quot; -print0 | xargs -0 egrep --with-filename --line-number --only-matching &quot;($KEYWORDS).*\$&quot; | perl -p -e &quot;s/($KEYWORDS)/ warning: \$1/&quot;</div></pre></td></tr></table></figure><p></p>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2016/11/10/微信小程序 示例开发/">
+                微信小程序 开发示例
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2016-11-10</span>
+            
+            
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <p>好久没写了，今天赶紧抽时间来放松下，顺便把前一段时间做的微信小程序demo发出来，供大家玩耍：<br><a href="https://github.com/jakajacky/WeChatApp" target="_blank" rel="external">https://github.com/jakajacky/WeChatApp</a><br><a href="https://github.com/jakajacky/AppStore-Inventory" target="_blank" rel="external">https://github.com/jakajacky/AppStore-Inventory</a><br>第一个主要是一些组件的使用；第二个是一个小demo，借鉴了别人的接口，实现 苹果零售店iphone7库存详情。</p>
+<p>欢迎指正，提问~</p>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2016/11/08/UIBezierPath实现波浪动画/">
+                UIBezierPath实现波浪动画
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2016-11-08</span>
+            
+            
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <h2 id="Mark："><a href="#Mark：" class="headerlink" title="Mark："></a>Mark：</h2><p></p><p>最近使用频繁的CAShaperLayer、CABasicAnimation、CAKeyframeAnimation，突然想实现一个以前APP中波浪线，效果如下：</p><br><img src="http://upload-images.jianshu.io/upload_images/329672-8235dc58632c0963.gif?imageMogr2/auto-orient/strip" alt="这里写图片描述"><p></p>
+<p><font color="gray">开始的调查发现，核心在于使用正弦函数sinf生成点，但是没有想到使用CGMutablePathRef以点划线，然后通过不停的改变sinf中的参数以及结果，来实现动画的效果。<font></font></font></p><br><p>我使用了UIBezierPath，但是常规的UIBezierPath只有最多两个controlPoint，例如下面：</p>
+
+<h2 id="代码实现："><a href="#代码实现：" class="headerlink" title="代码实现："></a>代码实现：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">path.move(to: _point)</div><div class="line">path.addCurve(to: _point1, controlPoint1: con1, controlPoint2: con2)</div></pre></td></tr></table></figure>
+<p>那么也就能画出一个周期：<br><img src="http://upload-images.jianshu.io/upload_images/329672-d708b887c2bbf1ee.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这里写图片描述"></p>
+<p>看来不能用现成的方法，那么UIBezierPath能不能自己addLine加点呢？我当时贱贱的想，其实是可以的，话不多说，上代码</p><br><p>在新建的WaveView.m中</p><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">override func draw(_ rect: CGRect) &#123;</div><div class="line">// layer</div><div class="line">backg = CAShapeLayer()</div><div class="line">backg.lineWidth   = 1</div><div class="line">backg.strokeColor = UIColor.clear.cgColor</div><div class="line">backg.fillColor   = UIColor.clear.cgColor</div><div class="line">backg.opacity     = 0.5</div><div class="line"></div><div class="line">// layer1</div><div class="line">backg_ = CAShapeLayer()</div><div class="line">backg_.lineWidth   = 1</div><div class="line">backg_.strokeColor = UIColor.clear.cgColor</div><div class="line">backg_.fillColor   = UIColor.clear.cgColor</div><div class="line">backg_.opacity     = 0.5</div><div class="line"></div><div class="line">// 贝塞尔曲线</div><div class="line">bezierPath = UIBezierPath()</div><div class="line"></div><div class="line">// 添加layers</div><div class="line">self.layer.addSublayer(backg)</div><div class="line">self.layer.addSublayer(backg_)</div><div class="line">// 定时，之所以用CADisplayLink做timer，下面会解释</div><div class="line">let link = CADisplayLink(target: self, selector: #selector(animation))</div><div class="line">link.add(to: RunLoop.main, forMode: .commonModes)</div><div class="line">&#125;</div></pre></td></tr></table></figure><br><br>在每一帧执行一次的animation（）中，给bezierPath划线：<br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">func animation() &#123;</div><div class="line">// 第一个layer</div><div class="line">bezierPath.removeAllPoints() // 清空上一次的所有点，也就是擦除上一次的波浪线</div><div class="line">offset += 2</div><div class="line">//var startY = 10.0*sinf(Float(M_PI*Double(offset)/375.0))</div><div class="line">print(startY)</div><div class="line">bezierPath.move(to: CGPoint(x: 0, y: 240)) // 设置起点</div><div class="line">// 终点和control点不用设置，通过下面的正弦函数计算，依靠addLine手动设置</div><div class="line"></div><div class="line">// 通过for生成一系列的point，当然，point.y的值是根据正弦sinf生成的</div><div class="line">for i in 0...374 &#123;</div><div class="line">let a = 2.5*M_PI*Double(i)/375.0</div><div class="line">let b = Double(offset)*M_PI/375.0</div><div class="line">let y = 1.1*10.0*sinf(Float(a+b)) + 200</div><div class="line">// 将点连线</div><div class="line">bezierPath.addLine(to: CGPoint(x: CGFloat(i), y: CGFloat(y)))</div><div class="line">&#125;</div><div class="line">// 闭环</div><div class="line">bezierPath.addLine(to: CGPoint(x: 375, y: 240)) // 设置终点</div><div class="line"></div><div class="line">backg.fillColor = UIColor.lightGray.cgColor</div><div class="line">backg.opacity = 0.5</div><div class="line">backg.path = bezierPath.cgPath</div><div class="line"></div><div class="line">// 同理第二个layer</div><div class="line">bezierPath.removeAllPoints()</div><div class="line">offset += 2</div><div class="line">bezierPath.move(to: CGPoint(x: 0, y: 240)) </div><div class="line">for i in 0...374 &#123;</div><div class="line">let a = 2.5*M_PI*Double(i)/375.0</div><div class="line">let b = Double(3*offset)*M_PI/375.0</div><div class="line">let y = 10.0*sinf(Float(a+b+M_PI/4)) + 200</div><div class="line">bezierPath.addLine(to: CGPoint(x: CGFloat(i), y: CGFloat(y)))</div><div class="line">&#125;</div><div class="line">bezierPath.addLine(to: CGPoint(x: 375, y: 240))</div><div class="line">backg_.fillColor = UIColor.lightGray.cgColor</div><div class="line">backg_.opacity = 0.5</div><div class="line">backg_.path = bezierPath.cgPath</div><div class="line">&#125;</div></pre></td></tr></table></figure><br><br><p>将WaveView加入父视图显示，效果图：</p><br><img src="http://img.blog.csdn.net/20161108105255069" alt="这里写图片描述"><br><p>gif的原因，最后有点闪，实际流畅的很呢^_^</p>
+
+<h2 id="demo地址："><a href="#demo地址：" class="headerlink" title="demo地址："></a>demo地址：</h2><p>demo地址：<a href="https://github.com/jakajacky/DRBezierWave" target="_blank" rel="external">https://github.com/jakajacky/DRBezierWave</a></p>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2016/11/04/CSDN到github pages+Hexo迁移/">
+                CSDN到github pages+Hexo迁移
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2016-11-04</span>
+            
+            
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <p><font color="red">Mark：</font></p><br><p>从今天开始尽量维护这个blog，目前用了<font color="brown">github pages</font>，以后也许会用wordPress吧，再租个服务器,看中了GoDady的，呵呵呼呼，那都是后话，从今天开始会逐渐把CSDN上的内容往这里迁移，也会发一些新的东西，done！！！</p>
+
+        </div>
+    
+
+</div>
+            
+        </section>
+    </div>
+</div>
+
+
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="wrap-pagination">
+                <a class="disabled" href="/">
+                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                </a>
+                <a class="" href="/page/2/">
+                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                </a>
             </div>
-        </header>
-    </div>
-</div>
-<!-- Main Content -->
-<div class="container custom-haojen-container">
-    <!-- Post Container -->
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-12 col-xs-12 post-container">
-            <!-- Main Content -->
-
-
-
-<div class="post-preview "
-     style="background-image: url('/images/post-default.jpg')">
-    <a href="/2016/11/29/CLLocationManager定位坐标不准确问题以及WGS_84转GCJ_02坐标位置纠错的方法/">
-        <h2 class="post-title">
-            CLLocationManager定位坐标不准确问题以及WGS_84转GCJ_02坐标位置纠错的方法
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2016-11-29
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                背景：  最近用高德的一个基于web的URI地图路径规划及导航模块，以实现根据起始坐标 实现路径规划，见此处  
-  起点是当前位置，由于没有集成高德API，所以用系统的CLLocationManager实现定位。
-问题：  但是实际上，CLLocationManager定位的坐标，在高德地图上..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('/images/post-default.jpg')">
-    <a href="/2016/11/23/iOS应用之间跳转 报错：_This app is not allowed to query for scheme ____/">
-        <h2 class="post-title">
-            iOS应用之间跳转 报错：This app is not allowed to query for scheme
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2016-11-23
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                Mark：关于应用之间跳转，核心代码是：
-1[[UIApplication sharedApplication] openURL:url]
-但是在试图打开这个url之前，应该先判断一下设备上是否安装了该url对应的APP，如果存在，打开APP，如果不存在，则做出相应处理：
-1BOOL isExi..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('/images/post-default.jpg')">
-    <a href="/2016/11/18/iOS 10 获得访问系统 camera、照片库、麦克风、日历等 权限问题/">
-        <h2 class="post-title">
-            iOS 10 获得访问系统 camera、照片库、麦克风、日历等 权限问题
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2016-11-18
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                问题:升级iOS 10之后，如果之前的项目中存在使用系统相机，麦克风，相册，通讯录等，运行APP会出现crash的情况，如下图：
-解决：按照崩溃的log提示，将对应的key加到工程plist中（以source code方式打开 plist）：
-或者在 Target -&gt; Info 中添加相..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('/images/post-default.jpg')">
-    <a href="/2016/11/16/Code=3000 _未找到应用程序的“aps-environment”的授权字符串_ 解决办法/">
-        <h2 class="post-title">
-            Code=3000 "未找到应用程序的“aps-environment”的授权字符串" 解决办法
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2016-11-16
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                Mark:
-这个问题可能比较多出现，网上呢一股脑的方案是：描述文件，推送证书与项目中的bundle identifer 不一致，或者什么appid不一致呀，什么证书生成顺序不一致呀，什么xcode的code signing没有配置呀，就不写了，网上搜很多，我现在就把自己的问题说一下：
-
-问题背景..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('/images/post-default.jpg')">
-    <a href="/2016/11/15/APP兼容64位之后，UIImageView等控件不显示，图片等内容不显示/">
-        <h2 class="post-title">
-            APP兼容64位之后，UIImageView等控件不显示，图片等内容不显示
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2016-11-15
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                Mark:距离上次给一个APP升级 兼容64位 过去很长时间了，今天又遇到一个，本来觉得很easy的，更新sqlcipher、jsonkit、不合适的静态库就好了，具体见我另一篇### 诡异问题：但是问题来了，所有配置工作做好了，也跑起来了，但是APP里的内容呢？word哥！！！空白一片，按钮不..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('/images/post-default.jpg')">
-    <a href="/2016/11/11/iMessage Apps and Stickers, Part 1/">
-        <h2 class="post-title">
-            iMessage Apps and Stickers, Part 1
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2016-11-11
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                Mark:iOS10的一大魅力所在，iMessage extension，也就是说我们可以扩展APP，使之在iMessage界面，也能被访问，并作出相应的操作；
-
-iMessage分为两类:1、Stickers Pack Application2、iMessage Application
-
-当然..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('/images/post-default.jpg')">
-    <a href="/2016/11/10/Xcode中自定义TODO-、FIXME-、cd-Users-xqzh-hexo-source-posts-clear-pwd-、-等自定义标签警告/">
-        <h2 class="post-title">
-            Xcode中自定义TODO 、FIXME 、!!! 、???等自定义标签警告
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2016-11-10
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                目前可用的标签// TODO:标识将来要完成的内容；
-// FIXME:标识以后要修正或完善的内容。
-// ???:疑问的地方
-// !!!:需要注意的地方
-以上四个提示xcode已经支持。
-
-可自定义的标签添加自定义的标识，并在编译时，在warning中显示出来:
-target–&gt;bui..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('/images/post-default.jpg')">
-    <a href="/2016/11/10/微信小程序 示例开发/">
-        <h2 class="post-title">
-            微信小程序 开发示例
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2016-11-10
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                好久没写了，今天赶紧抽时间来放松下，顺便把前一段时间做的微信小程序demo发出来，供大家玩耍：https://github.com/jakajacky/WeChatApphttps://github.com/jakajacky/AppStore-Inventory第一个主要是一些组件的使用；第二..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('/images/post-default.jpg')">
-    <a href="/2016/11/08/UIBezierPath实现波浪动画/">
-        <h2 class="post-title">
-            UIBezierPath实现波浪动画
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2016-11-08
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                Mark：最近使用频繁的CAShaperLayer、CABasicAnimation、CAKeyframeAnimation，突然想实现一个以前APP中波浪线，效果如下：
-开始的调查发现，核心在于使用正弦函数sinf生成点，但是没有想到使用CGMutablePathRef以点划线，然后通过不停的..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('/images/post-default.jpg')">
-    <a href="/2016/11/04/CSDN到github pages+Hexo迁移/">
-        <h2 class="post-title">
-            CSDN到github pages+Hexo迁移
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2016-11-04
-        </p>
-        
-        <h3 class="post-subtitle">
-            hi, I'm roach
-        </h3>
-        
-        <div class="post-content-preview">
-            <p>
-                Mark：从今天开始尽量维护这个blog，目前用了github pages，以后也许会用wordPress吧，再租个服务器,看中了GoDady的，呵呵呼呼，那都是后话，从今天开始会逐渐把CSDN上的内容往这里迁移，也会发一些新的东西，done！！！
-
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-
-<!-- 翻页 pager -->
-
-<ul class="pager">
-    
-    
-    <li class="next">
-        <a href="/page/2/">Older Posts &rarr;</a>
-    </li>
-    
-</ul>
-
-
-        </div>
-        <!-- Sidebar Container -->
-        <div class="
-                col-lg-3 col-lg-offset-0
-                col-md-3 col-md-offset-0
-                col-sm-12
-                col-xs-12
-                sidebar-container
-            ">
-
-            <!-- About Me -->
-            <section class="visible-md visible-lg" style="padding: 0 18px">
-                <div class="short-about">
-                    <!--侧边栏头像-->
-                    
-                    <img src="/images/avatar_cat.jpg"/>
-                    
-                    <h5><a href="/about/">John</a></h5>
-                    
-                    <p>iOSのcoder</p>
-                    
-                    <hr>
-                    <!-- SNS Link 社交 -->
-                    <ul class="list-inline">
-                        
-                        
-                        <li>
-                            <a target="_blank" href="https://twitter.com/ZhangxJack">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                                        </span>
-                            </a>
-                        </li>
-                        
-                        
-
-                        
-                        <li>
-                            <a target="_blank" href="http://weibo.com/jakajacky">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
-                                        </span>
-                            </a>
-                        </li>
-                        
-
-                        
-
-                        
-                        <li>
-                            <a target="_blank" href="https://github.com/jakajacky">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                                        </span>
-                            </a>
-                        </li>
-                        
-
-                        
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Featured Tags  标签 -->
-            
-            <section>
-                <div class="tags">
-                    
-                    
-                    <a href="/tags/#iOS" title="iOS"
-                       rel="8">iOS</a>
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                </div>
-            </section>
-            
-
-            
-
         </div>
     </div>
+
+
+
+
 </div>
 
 <!-- Footer -->
-<!-- Footer -->
-<footer>
+<div class="push"></div>
+
+<footer class="footer-content">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
-                <br>
-                <ul class="list-inline text-center">
-                
-                
-                    <li>
-                        <a target="_blank" href="https://twitter.com/ZhangxJack">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                
-                
-
-                
-                    <li>
-                        <a target="_blank" href="http://weibo.com/jakajacky">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                
-
-                
-
-                
-                    <li>
-                        <a target="_blank"  href="https://github.com/jakajacky">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                
-
-                
-
-                </ul>
-                <p class="copyright text-muted">
-                    Copyright &copy; Roach 2016
-                    <br>
-                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
-                    <br>
-                    Theme by <a href="https://haojen.github.io/">Haojen Ma</a>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 footer-about">
+                <h2>About</h2>
+                <p>
+                    This theme was developed by <a href="https://github.com/klugjo">Jonathan Klughertz</a>. The source code is available on Github. Create Websites. Make Magic.
                 </p>
+            </div>
+            
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 recent-posts">
+        <h2>Recent Posts</h2>
+        <ul>
+            
+            <li>
+                <a class="footer-post" href="/2016/11/29/CLLocationManager定位坐标不准确问题以及WGS_84转GCJ_02坐标位置纠错的方法/">CLLocationManager定位坐标不准确问</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2016/11/23/iOS应用之间跳转 报错：_This app is not allowed to query for scheme ____/">iOS应用之间跳转 报错：This app is </a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2016/11/18/iOS 10 获得访问系统 camera、照片库、麦克风、日历等 权限问题/">iOS 10 获得访问系统 camera、照片库、</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2016/11/16/Code=3000 _未找到应用程序的“aps-environment”的授权字符串_ 解决办法/">Code=3000 &quot;未找到应用程序的“aps-e</a>
+            </li>
+            
+        </ul>
+    </div>
 
+
+
+            
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <ul class="list-inline footer-social-icons">
+                    
+                    <li class="list-inline-item">
+                        <a href="https://github.com/klugjo/hexo-theme-alpha-dust">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-github"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://twitter.com/?lang=en">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-twitter"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.facebook.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-facebook"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.instagram.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-instagram"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://dribbble.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-dribbble"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://plus.google.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-google-plus"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.behance.net/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-behance"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://500px.com/">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-500px"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="mailto:test@example.com">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-envelope-o"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="\#">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-rss"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="footer-copyright">
+                    @Untitled. All right reserved | Design & Hexo <a href="http://www.codeblocq.com/">Jonathan Klughertz</a>
+                </div>
             </div>
         </div>
     </div>
 </footer>
 
+<!-- After footer scripts -->
+
 <!-- jQuery -->
-<script src="/js/jquery.min.js"></script>
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
 
-<!-- Bootstrap Core JavaScript -->
-<script src="/js/bootstrap.min.js"></script>
+<!-- Tween Max -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TweenMax.min.js"></script>
 
-<!-- Custom Theme JavaScript -->
-<script src="/js/blog.js"></script>
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
 
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
+<!-- Custom JavaScript -->
+<script src="/js/main.js"></script>
 
-<!-- jquery.tagcloud.js -->
-<script>
-    // only load tagcloud.js in tag.html
-    if($('#tag_cloud').length !== 0){
-        async("https://jakajacky.github.io/js/jquery.tagcloud.js",function(){
-            $.fn.tagcloud.defaults = {
-                //size: {start: 1, end: 1, unit: 'em'},
-                color: {start: '#bbbbee', end: '#0085a1'},
-            };
-            $('#tag_cloud a').tagcloud();
-        })
-    }
-</script>
-
-<!--fastClick.js -->
-<script>
-    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
-        var $nav = document.querySelector("nav");
-        if($nav) FastClick.attach($nav);
-    })
-</script>
-
-<!-- Google Analytics -->
+<!-- Disqus Comments -->
 
 
 
-<!-- Baidu Tongji -->
-
-<script>
-    var _baId = '4cc1f2d8f3067386cc5cdb626a202900';
-    // Originial
-    var _hmt = _hmt || [];
-    (function() {
-        var hm = document.createElement("script");
-        hm.src = "//hm.baidu.com/hm.js?" + _baId;
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();
-</script>
-
-
-<!-- swiftype -->
-<script type="text/javascript">
-  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
-  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
-  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
-  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
-
-  _st('install','undefined','2.0.0');
-</script>
-
-<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-<!--wechat title img-->
-<img class="wechat-title-img" src="/images/avatar_cat.jpg">
 </body>
 
 </html>
