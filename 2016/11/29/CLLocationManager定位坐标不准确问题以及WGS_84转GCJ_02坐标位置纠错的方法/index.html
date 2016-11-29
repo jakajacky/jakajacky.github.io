@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="iOSのcoder">
+    <meta name="keyword" content="undefined">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="/images/123.png">
+    <link rel="alternate" type="application/atom+xml" title="Roach" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        CLLocationManager定位坐标不准确问题以及WGS_84转GCJ_02坐标位置纠错的方法｜Roach&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://jakajacky.github.io/2016/11/29/CLLocationManager定位坐标不准确问题以及WGS_84转GCJ_02坐标位置纠错的方法/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('/images/about-bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Roach
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/tags/">tags</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="/images/post-default.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('/images/post-default.jpg')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>CLLocationManager定位坐标不准确问题以及WGS_84转GCJ_02坐标位置纠错的方法</h1>
+                    
+                    <span class="meta">
+                         作者 john
+                        <span>
+                          日期 2016-11-29
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#iOS"
+                           title="iOS">iOS</a>
+                        
+                        <a class="tag" href="/tags/#位置纠错算法"
+                           title="位置纠错算法">位置纠错算法</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            CLLocationManager定位坐标不准确问题以及WGS_84转GCJ_02坐标位置纠错的方法
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <p>#背景：</p>
+<p>最近用高德的一个基于web的URI地图路径规划及导航模块，以实现根据起始坐标 实现路径规划，<a href="http://lbs.amap.com/api/uri-api/guide/mobile-web/route-plan/" target="_blank" rel="external">见此处</a>  </p><p>起点是当前位置，由于没有集成高德API，所以用系统的CLLocationManager实现定位。</p><br>#问题：<br><p>但是实际上，CLLocationManager定位的坐标，在高德地图上标注的位置与实际地点有偏差，并且较大！以前知道不同的地图坐标不能直接通用，但是如我所知，Apple的地图也是基于高德的，为什么CLLocationManager定位出的不准确，而MKMapView的定位却是准确的呢？</p><br>#原因：<br><p>是这样的，按照国家统一的保密要求，任何一个地图产品都不允许使用GPS坐标，国内地图使用的坐标系统是<font color="green">GCJ-02</font>。<font size="2" color="blue">GCJ-02，国测局02年发布的坐标体系。又称“火星坐标”。</font>在中国，必须<font color="red">至少使用</font>GCJ-02的坐标体系。比如<font color="red">谷歌</font>，<font color="red">腾讯</font>，<font color="red">高德</font>都在用这个坐标体系。</p><br><p>国内其他坐标体系。一般都是由GCJ-02进过偏移算法得到的。这种体系就根据每个公司的不同，坐标体系都不一样了。比如，<font color="red">百度和搜狗</font>就使用自己的坐标体系，与其他坐标体系不兼容。百度（BD_09坐标）</p><br><p>到这里大家可能都猜出了CLLocationManager有偏差，是因为采用的是<font color="brown">WGS-84</font>，也就是GPS原始坐标；</p><br><p>Apple的MKMapView框架准确，是因为 老乔想进中国，就得按规矩来咯，所以iOS中的地图理所应当将<font color="brown">WGS-84</font>坐标转成了国内<font color="green">GCJ-02</font>坐标;</p><br>#解决：<br>##思路一：<br><p>使用现有API转换，将CLLocationManager的WGS_84坐标转成GCJ_02坐标，调用apple的私有模块类<font color="brown">MKLocationManager</font>中得方法来对经纬度做一个偏移修正</p><br><p><font color="red">问题：但是如此使用会审核被拒，而且iOS 5之后，这个方法已经不再使用。</font></p><br>##思路二：<br><p>既然MKMapView地图中的定位是准确的，那么用[self.mapView setShowsUserLocation:YES]得了</p><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">-(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation &#123;</div><div class="line">  CLLocationCoordinate2D coord = [userLocation coordinate];</div><div class="line">  NSLog(@&quot;经度:%f,纬度:%f&quot;,coord.latitude,coord.longitude);</div><div class="line">&#125;</div></pre></td></tr></table></figure><br><br><p><font color="red">不足：需要将mapView加到父视图上，不然不会调用上面的代理方法，当然了，可以设置为hidden=YES，也是个办法</font></p><br>##思路三：<br><p>使用算法，对得到的WGS_84坐标处理，得到GCJ_02坐标</p><br><p><font size="2" color="grag">听闻是为了国家安全搞的加密措施，使用的是非线性的偏移值，想得到真实的数据，得同GCJ申请，交钱，才能得到解密方法。不过高手在民间啊，被人破解了,具体<a href="https://wuyongzheng.wordpress.com/2010/01/22/china-map-deviation-as-a-regression-problem/" target="_blank" rel="external">算法分析可以看这篇文章</a></font></p><br><p><font color="red">这个算法网上是有的，具体出自谁不清楚，还是要感谢并参考一下，下面贴出位置纠错算法的OC代码：新建一个继承NSObject的类</font></p><br>WGS84ConvertToGCJ02.h 文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">#import &lt;Foundation/Foundation.h&gt;</div><div class="line">#import &lt;MapKit/MapKit.h&gt;</div><div class="line"></div><div class="line">@interface WGS84ConvertToGCJ02ForAMapView : NSObject</div><div class="line">//判断是否已经超出中国范围</div><div class="line">+(BOOL)isLocationOutOfChina:(CLLocationCoordinate2D)location;</div><div class="line">//转GCJ-02</div><div class="line">+(CLLocationCoordinate2D)transformFromWGSToGCJ:(CLLocationCoordinate2D)wgsLoc;</div><div class="line">@end</div></pre></td></tr></table></figure><br><br>WGS84ConvertToGCJ02.m文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line">#import &quot;WGS84ConvertToGCJ02ForAMapView.h&quot;</div><div class="line"></div><div class="line">const double a = 6378245.0;</div><div class="line">const double ee = 0.00669342162296594323;</div><div class="line"></div><div class="line">@implementation WGS84ConvertToGCJ02ForAMapView</div><div class="line"></div><div class="line">+(CLLocationCoordinate2D)transformFromWGSToGCJ:(CLLocationCoordinate2D)wgsLoc</div><div class="line">&#123;</div><div class="line">  CLLocationCoordinate2D adjustLoc;</div><div class="line">  if([self isLocationOutOfChina:wgsLoc])&#123;</div><div class="line">    adjustLoc = wgsLoc;</div><div class="line">  &#125;else&#123;</div><div class="line">    double adjustLat = [self transformLatWithX:wgsLoc.longitude - 105.0 withY:wgsLoc.latitude - 35.0];</div><div class="line">    double adjustLon = [self transformLonWithX:wgsLoc.longitude - 105.0 withY:wgsLoc.latitude - 35.0];</div><div class="line">    double radLat = wgsLoc.latitude / 180.0 * M_PI;</div><div class="line">    double magic = sin(radLat);</div><div class="line">    magic = 1 - ee * magic * magic;</div><div class="line">    double sqrtMagic = sqrt(magic);</div><div class="line">    adjustLat = (adjustLat * 180.0) / ((a * (1 - ee)) / (magic * sqrtMagic) * M_PI);</div><div class="line">    adjustLon = (adjustLon * 180.0) / (a / sqrtMagic * cos(radLat) * M_PI);</div><div class="line">    adjustLoc.latitude = wgsLoc.latitude + adjustLat - 0.00039900; // 减去这个数字 完全是凑数，准确性有待验证</div><div class="line">    adjustLoc.longitude = wgsLoc.longitude + adjustLon;</div><div class="line">  &#125;</div><div class="line">  return adjustLoc;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//判断是不是在中国</div><div class="line">+(BOOL)isLocationOutOfChina:(CLLocationCoordinate2D)location</div><div class="line">&#123;</div><div class="line">  if (location.longitude &lt; 72.004 || location.longitude &gt; 137.8347 || location.latitude &lt; 0.8293 || location.latitude &gt; 55.8271)</div><div class="line">    return YES;</div><div class="line">  return NO;</div><div class="line">&#125;</div><div class="line"></div><div class="line">+(double)transformLatWithX:(double)x withY:(double)y</div><div class="line">&#123;</div><div class="line">  double lat = -100.0 + 2.0 * x + 3.0 * y + 0.2 * y * y + 0.1 * x * y + 0.2 * sqrt(fabs(x));</div><div class="line">  lat += (20.0 * sin(6.0 * x * M_PI) + 20.0 *sin(2.0 * x * M_PI)) * 2.0 / 3.0;</div><div class="line">  lat += (20.0 * sin(y * M_PI) + 40.0 * sin(y / 3.0 * M_PI)) * 2.0 / 3.0;</div><div class="line">  lat += (160.0 * sin(y / 12.0 * M_PI) + 320 * sin(y * M_PI / 30.0)) * 2.0 / 3.0;</div><div class="line">  return lat;</div><div class="line">&#125;</div><div class="line"></div><div class="line">+(double)transformLonWithX:(double)x withY:(double)y</div><div class="line">&#123;</div><div class="line">  double lon = 300.0 + x + 2.0 * y + 0.1 * x * x + 0.1 * x * y + 0.1 * sqrt(fabs(x));</div><div class="line">  lon += (20.0 * sin(6.0 * x * M_PI) + 20.0 * sin(2.0 * x * M_PI)) * 2.0 / 3.0;</div><div class="line">  lon += (20.0 * sin(x * M_PI) + 40.0 * sin(x / 3.0 * M_PI)) * 2.0 / 3.0;</div><div class="line">  lon += (150.0 * sin(x / 12.0 * M_PI) + 300.0 * sin(x / 30.0 * M_PI)) * 2.0 / 3.0;</div><div class="line">  return lon;</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure><br><br><p>以我的项目为例，在CLLocationManager的定位代理方法中这样使用：</p>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">#pragma mark -</div><div class="line">#pragma mark CLLocationManagerDelegate</div><div class="line">- (void)locationManager:(CLLocationManager *)manager</div><div class="line">     didUpdateLocations:(NSArray *)locations</div><div class="line">&#123;</div><div class="line">  CLLocation *newLocation = [locations firstObject];</div><div class="line">  //判断是不是属于国内范围</div><div class="line">  if (![WGS84ConvertToGCJ02ForAMapView isLocationOutOfChina:[newLocation coordinate]]) &#123;</div><div class="line">    //转换后的coord</div><div class="line">    CLLocationCoordinate2D coord = [WGS84ConvertToGCJ02ForAMapView transformFromWGSToGCJ:[newLocation coordinate]];</div><div class="line">    newLocation = [[CLLocation alloc] initWithLatitude:coord.latitude longitude:coord.longitude];</div><div class="line">  &#125;</div><div class="line">  if (_location) &#123;</div><div class="line">    if (newLocation.horizontalAccuracy &lt; _location.horizontalAccuracy) &#123;</div><div class="line">      _location = newLocation;</div><div class="line">      [self postLocationNotificationOnMainThreadWithName:GPSManagerUpdateLocationNotification];</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  else&#123;</div><div class="line">    _location = newLocation;</div><div class="line">    [self postLocationNotificationOnMainThreadWithName:GPSManagerUpdateLocationNotification];</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><font color="red">不足：毕竟不是正统解密算法，还是会有偏差，大概10+m，但是精度已经很高了。</font></p>
+
+<p>#位置纠错算法的OC代码源文件<br><a href="https://github.com/jakajacky/WGS84--GCJ02" target="_blank" rel="external">下载地址</a></p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    
+                    <li class="next">
+                        <a href="/2016/11/23/iOS应用之间跳转 报错：_This app is not allowed to query for scheme ____/" data-toggle="tooltip" data-placement="top"
+                           title="iOS应用之间跳转 报错：This app is not allowed to query for scheme">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+                <!-- 多说评论框 start -->
+                <div class="comment">
+                    <div class="ds-thread"
+                         data-thread-key="2016/11/29/CLLocationManager定位坐标不准确问题以及WGS_84转GCJ_02坐标位置纠错的方法/"
+                         data-title="CLLocationManager定位坐标不准确问题以及WGS_84转GCJ_02坐标位置纠错的方法"
+                         data-url="https://jakajacky.github.io/2016/11/29/CLLocationManager定位坐标不准确问题以及WGS_84转GCJ_02坐标位置纠错的方法/">
+                    </div>
+                </div>
+                <!-- 多说评论框 end -->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#iOS"
+                           title="iOS">iOS</a>
+                        
+                        <a class="tag" href="/tags/#位置纠错算法"
+                           title="位置纠错算法">位置纠错算法</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    // dynamic User by Hux
+    var _user = 'jakajacky';
+
+    // duoshuo comment query.
+    var duoshuoQuery = {short_name: _user};
+    (function () {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';
+        ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+<!-- 多说公共JS代码 end -->
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/ZhangxJack">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/jakajacky">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/jakajacky">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Roach 2016
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://jakajacky.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','undefined','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="/images/avatar_cat.jpg">
+</body>
+
+</html>

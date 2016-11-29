@@ -22,7 +22,7 @@
         
     </title>
 
-    <link rel="canonical" href="https://jakajacky.github.io/">
+    <link rel="canonical" href="https://jakajacky.github.io/page/2/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -271,252 +271,19 @@
 
 
 
-<div class="post-preview "
-     style="background-image: url('/images/post-default.jpg')">
-    <a href="/2016/11/29/CLLocationManager定位坐标不准确问题以及WGS_84转GCJ_02坐标位置纠错的方法/">
+<div class="post-preview  "
+     style="background-image: url('http://f.hiphotos.baidu.com/lvpics/h=800/sign=fc26b1af912bd4075dc7defd4b889e9c/b21c8701a18b87d6d27d8498010828381f30fd7e.jpg')">
+    <a href="/2016/11/04/hello-world/">
         <h2 class="post-title">
-            CLLocationManager定位坐标不准确问题以及WGS_84转GCJ_02坐标位置纠错的方法
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2016-11-29
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                #背景：
-最近用高德的一个基于web的URI地图路径规划及导航模块，以实现根据起始坐标 实现路径规划，见此处  起点是当前位置，由于没有集成高德API，所以用系统的CLLocationManager实现定位。#问题：但是实际上，CLLocationManager定位的坐标，在高德地图上标注的位置..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('/images/post-default.jpg')">
-    <a href="/2016/11/23/iOS应用之间跳转 报错：_This app is not allowed to query for scheme ____/">
-        <h2 class="post-title">
-            iOS应用之间跳转 报错：This app is not allowed to query for scheme
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2016-11-23
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                Mark：关于应用之间跳转，核心代码是：
-1[[UIApplication sharedApplication] openURL:url]
-但是在试图打开这个url之前，应该先判断一下设备上是否安装了该url对应的APP，如果存在，打开APP，如果不存在，则做出相应处理：
-1BOOL isExi..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('/images/post-default.jpg')">
-    <a href="/2016/11/18/iOS 10 获得访问系统 camera、照片库、麦克风、日历等 权限问题/">
-        <h2 class="post-title">
-            iOS 10 获得访问系统 camera、照片库、麦克风、日历等 权限问题
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2016-11-18
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                问题:升级iOS 10之后，如果之前的项目中存在使用系统相机，麦克风，相册，通讯录等，运行APP会出现crash的情况，如下图：
-解决：按照崩溃的log提示，将对应的key加到工程plist中（以source code方式打开 plist）：
-或者在 Target -&gt; Info 中添加相..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('/images/post-default.jpg')">
-    <a href="/2016/11/16/Code=3000 _未找到应用程序的“aps-environment”的授权字符串_ 解决办法/">
-        <h2 class="post-title">
-            Code=3000 "未找到应用程序的“aps-environment”的授权字符串" 解决办法
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2016-11-16
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                Mark:
-这个问题可能比较多出现，网上呢一股脑的方案是：描述文件，推送证书与项目中的bundle identifer 不一致，或者什么appid不一致呀，什么证书生成顺序不一致呀，什么xcode的code signing没有配置呀，就不写了，网上搜很多，我现在就把自己的问题说一下：
-
-问题背景..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('/images/post-default.jpg')">
-    <a href="/2016/11/15/APP兼容64位之后，UIImageView等控件不显示，图片等内容不显示/">
-        <h2 class="post-title">
-            APP兼容64位之后，UIImageView等控件不显示，图片等内容不显示
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2016-11-15
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                Mark:距离上次给一个APP升级 兼容64位 过去很长时间了，今天又遇到一个，本来觉得很easy的，更新sqlcipher、jsonkit、不合适的静态库就好了，具体见我另一篇### 诡异问题：但是问题来了，所有配置工作做好了，也跑起来了，但是APP里的内容呢？word哥！！！空白一片，按钮不..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('/images/post-default.jpg')">
-    <a href="/2016/11/11/iMessage Apps and Stickers, Part 1/">
-        <h2 class="post-title">
-            iMessage Apps and Stickers, Part 1
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2016-11-11
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                Mark:iOS10的一大魅力所在，iMessage extension，也就是说我们可以扩展APP，使之在iMessage界面，也能被访问，并作出相应的操作；
-
-iMessage分为两类:1、Stickers Pack Application2、iMessage Application
-
-当然..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('/images/post-default.jpg')">
-    <a href="/2016/11/10/Xcode中自定义TODO-、FIXME-、cd-Users-xqzh-hexo-source-posts-clear-pwd-、-等自定义标签警告/">
-        <h2 class="post-title">
-            Xcode中自定义TODO 、FIXME 、!!! 、???等自定义标签警告
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2016-11-10
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                目前可用的标签// TODO:标识将来要完成的内容；
-// FIXME:标识以后要修正或完善的内容。
-// ???:疑问的地方
-// !!!:需要注意的地方
-以上四个提示xcode已经支持。
-
-可自定义的标签添加自定义的标识，并在编译时，在warning中显示出来:
-target–&gt;bui..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('/images/post-default.jpg')">
-    <a href="/2016/11/10/微信小程序 示例开发/">
-        <h2 class="post-title">
-            微信小程序 开发示例
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2016-11-10
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                好久没写了，今天赶紧抽时间来放松下，顺便把前一段时间做的微信小程序demo发出来，供大家玩耍：https://github.com/jakajacky/WeChatApphttps://github.com/jakajacky/AppStore-Inventory第一个主要是一些组件的使用；第二..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('/images/post-default.jpg')">
-    <a href="/2016/11/08/UIBezierPath实现波浪动画/">
-        <h2 class="post-title">
-            UIBezierPath实现波浪动画
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2016-11-08
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                Mark：最近使用频繁的CAShaperLayer、CABasicAnimation、CAKeyframeAnimation，突然想实现一个以前APP中波浪线，效果如下：
-开始的调查发现，核心在于使用正弦函数sinf生成点，但是没有想到使用CGMutablePathRef以点划线，然后通过不停的..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('/images/post-default.jpg')">
-    <a href="/2016/11/04/CSDN到github pages+Hexo迁移/">
-        <h2 class="post-title">
-            CSDN到github pages+Hexo迁移
+            Hello World
         </h2>
         <p class="post-meta">
             <i class="fa fa-calendar" aria-hidden="true"></i> 2016-11-04
         </p>
         
-        <h3 class="post-subtitle">
-            hi, I'm roach
-        </h3>
-        
         <div class="post-content-preview">
             <p>
-                Mark：从今天开始尽量维护这个blog，目前用了github pages，以后也许会用wordPress吧，再租个服务器,看中了GoDady的，呵呵呼呼，那都是后话，从今天开始会逐渐把CSDN上的内容往这里迁移，也会发一些新的东西，done！！！
-
+                Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer i..
             </p>
         </div>
     </a>
@@ -532,10 +299,10 @@ target–&gt;bui..
 
 <ul class="pager">
     
-    
-    <li class="next">
-        <a href="/page/2/">Older Posts &rarr;</a>
+    <li class="previous">
+        <a href="/">&larr; Newer Posts</a>
     </li>
+    
     
 </ul>
 
