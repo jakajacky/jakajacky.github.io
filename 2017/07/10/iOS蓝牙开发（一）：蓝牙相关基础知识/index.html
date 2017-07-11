@@ -18,11 +18,11 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
     <title>
         
-        Roach&#39;s blog
+        iOS蓝牙开发（一）：蓝牙相关基础知识｜Roach&#39;s blog
         
     </title>
 
-    <link rel="canonical" href="https://jakajacky.github.io/page/2/">
+    <link rel="canonical" href="https://jakajacky.github.io/2017/07/10/iOS蓝牙开发（一）：蓝牙相关基础知识/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -45,8 +45,8 @@
 <!-- hack iOS CSS :active style -->
 <body ontouchstart="" class="animated fadeIn">
 <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "false" data-istags="false
-" data-ishome = "true" >
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header page-scroll">
@@ -134,324 +134,189 @@
 
 <!-- Main Content -->
 
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="/images/post-default.jpg">
+
 
 <style>
-
-    .custom-haojen-container .post-preview:nth-of-type(1),
-    .custom-haojen-container .post-preview-poetry:nth-of-type(1) {
-        text-align: center;
-        background-repeat: no-repeat;
-        border-radius: 3px;
-        background-size: cover;
-        padding: 0;
-        height: 300px;
-        display: table;
-        width: 100%;
-        background-color: rgba(0, 0, 0, 0.16);
+    
+    header.intro-header {
+        background-image: url('/images/post-default.jpg')
     }
 
-    /*去掉诗歌的背景图片*/
-    .custom-haojen-container .post-preview-poetry:nth-of-type(1) {
-        background-image: none !important;
-        background-color: rgba(255, 248, 220, 0.5);
-    }
-
-    .custom-haojen-container .post-preview:nth-child(1) h2,
-    .custom-haojen-container .post-preview:nth-child(1) .post-meta,
-    .custom-haojen-container .post-preview:nth-child(1) .post-subtitle {
-        text-shadow: 0 0 40px rgba(0, 0, 0, 1);
-        letter-spacing: 1px;
-        color: #fff;
-        margin-top: 0;
-        padding-left: 60px;
-        padding-right: 60px;
-    }
-
-    .custom-haojen-container .post-preview:nth-child(1) .post-meta {
-        font-size: .9em;
-        font-weight: 300;
-        margin-top: 0;
-    }
-
-    .custom-haojen-container .post-preview-poetry:nth-child(1) .post-subtitle {
-        letter-spacing: 6px;
-        font-size: 18px;
-        font-family: unset;
-        font-weight: 400;
-        color: rgba(0, 0, 0, .75)
-    }
-
-    /*不显示摘要*/
-    .custom-haojen-container .post-preview:nth-child(1) .post-content-preview {
-        display: none
-    }
-
-    /*只第一个显示背景图片*/
-    .custom-haojen-container .post-preview:not(:nth-child(1)) {
-        background-image: none !important;
-    }
-
-    /*第一个分界线去掉*/
-    .custom-haojen-container hr:nth-of-type(1) {
-        display: none;
-    }
-
-    /*主题*/
-    .custom-haojen-container .post-preview:nth-of-type(1) > a {
-        display: table-cell;
-        vertical-align: middle;
-    }
-
-    /*诗词标题*/
-    .custom-haojen-container .post-preview-poetry:nth-child(1) h2 {
-        font-size: 35px;
-        font-family: STKaiti;
-        color: rgba(0, 0, 0, .8);
-    }
-
-    .custom-haojen-container .post-preview-poetry:nth-of-type(1) .post-meta {
-        color: #0e2231;
-    }
-
-    @media (max-width: 768px) {
-        .custom-haojen-container .post-preview:nth-child(1) {
-            height: 240px;
-        }
-
-        .custom-haojen-container .post-preview-poetry:nth-child(1) h2 {
-            font-size: 28px !important;
-            margin-top: 0;
-        }
-
-        .custom-haojen-container .post-preview:nth-child(1) .post-subtitle {
-            font-size: 18px;
-            font-weight: 400;
-            padding-left: 0;
-            padding-right: 0;
-        }
-
-        .custom-haojen-container .post-preview:nth-of-type(1) > a {
-            padding: 20px
-        }
-    }
-
-    /*手机屏幕*/
-    @media (max-width: 400px) {
-        .custom-haojen-container .post-preview:nth-child(1) {
-            height: 195px;
-        }
-
-        .custom-haojen-container .post-preview-poetry:nth-child(1) h2 {
-            font-size: 20px !important;
-        }
-
-        .custom-haojen-container .post-preview:nth-child(1) .post-subtitle {
-            font-size: 16px;
-        }
-
-        .custom-haojen-container .post-preview:nth-child(1) a {
-            padding: 30px 20px;
-        }
-    }
+    
 </style>
 
-<!-- Page Header -->
-<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 visible-xs-block visible-sm-block">
-    <div class="row">
-        <header class="intro-header">
-            <div class="container">
-                <div class="site-heading text-center">
-                    <div class="about-me">
-                        <!--移动端头部显示-->
-                        <img src="/images/avatar_cat.jpg"/>
-                        <h5><a href="/about/">John</a></h5>
-                        <p>iOSのcoder</p>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>iOS蓝牙开发（一）：蓝牙相关基础知识</h1>
+                    
+                    <span class="meta">
+                         作者 john
+                        <span>
+                          日期 2017-07-10
+                         </span>
+                         <span id="busuanzi_container_page_pv">
+                          阅读量<span id="busuanzi_value_page_pv"></span>次
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#iOS"
+                           title="iOS">iOS</a>
+                        
+                        <a class="tag" href="/tags/#BLE"
+                           title="BLE">BLE</a>
+                        
                     </div>
                 </div>
             </div>
-        </header>
+        </div>
     </div>
-</div>
-<!-- Main Content -->
-<div class="container custom-haojen-container">
-    <!-- Post Container -->
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-12 col-xs-12 post-container">
-            <!-- Main Content -->
+    <div class="post-title-haojen">
+        <span>
+            iOS蓝牙开发（一）：蓝牙相关基础知识
+        </span>
+    </div>
+</header>
 
-
-
-<div class="post-preview  "
-     style="background-image: url('http://f.hiphotos.baidu.com/lvpics/h=800/sign=fc26b1af912bd4075dc7defd4b889e9c/b21c8701a18b87d6d27d8498010828381f30fd7e.jpg')">
-    <a href="/2016/11/04/hello-world/">
-        <h2 class="post-title">
-            Hello World
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2016-11-04
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer i..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('/images/post-default.jpg')">
-    <a href="/2016/11/04/CSDN到github pages+Hexo迁移/">
-        <h2 class="post-title">
-            CSDN到github pages+Hexo迁移
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2016-11-04
-        </p>
-        
-        <h3 class="post-subtitle">
-            hi, I'm roach
-        </h3>
-        
-        <div class="post-content-preview">
-            <p>
-                Mark：从今天开始尽量维护这个blog，目前用了github pages，以后也许会用wordPress吧，再租个服务器,看中了GoDady的，呵呵呼呼，那都是后话，从今天开始会逐渐把CSDN上的内容往这里迁移，也会发一些新的东西，done！！！
-
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-
-<!-- 翻页 pager -->
-
-<ul class="pager">
-    
-    <li class="previous">
-        <a href="/">&larr; Newer Posts</a>
-    </li>
-    
-    
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <p>####蓝牙常见词汇</p>
+<ul>
+<li>MFI ：苹果认证的设备</li>
+<li>BLE ：bluetooth low energy 说明蓝牙4.0设备明显的特点是<font color="red">耗电低</font></li>
+<li>Central ：中心，发起连接的设备</li>
+<li>Peripheral ：外设，被连接的设备</li>
+<li>Service ：服务，一个外设有多个服务，类似于服务端的API</li>
+<li>Characteristic ：特征，一个服务有多个特征，特征的权限有read、write、notify几种</li>
+<li>Description ：描述Characteristic的信息或属性，每个Characteristic可以对应多个Description</li>
+<li>APP中常见的是中心模式，即手机作为Central</li>
+<li><p>对于iOS BLE开发，用CoreBluetooth框架、开发MFI，用ExternalAccessory框架<br>####中心模式流程</p>
+<blockquote>
+<p>1、建立中心管理centralManager<br>2、扫描外设discoverPeripheral<br>3、连接外设connectPeripheral<br>4、扫描外设中的Service<br>5、扫描Service中的Characteristic<br>6、获取Characteristic的值value以及Description<br>7、与外设做数据交互，write、read/notify订阅<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; read：主动获取数据；notify：外设主动发送通知</p>
+</blockquote>
+<h2 id="notify方式："><a href="#notify方式：" class="headerlink" title="  notify方式："></a>  notify方式：</h2><p>  <em>– 订阅成功后回调didUpdateNotificationStateForCharacteristic
+  </em>– 订阅后characteristic的值发生变化会发送通知到didUpdateValueForCharacteristic<br>  *– 取消订阅：设置setNotifyValue为NO<br>  [Peripheral setNotifyValue:YES forCharacteristic:characteristic];<br>  read方式：<br>  [Peripheral readValueForCharacteristic:characteristic];</p>
+</li>
 </ul>
+<blockquote>
+<p>8、断开连接disConnectPeripheral</p>
+</blockquote>
+<p>####蓝牙设备状态</p>
+<blockquote>
+<p>1、待机状态 standby：设备没有接受和发送数据，没有连接到任何central<br>2、广播状态 advertiser：周期性广播状态<br>3、扫描状态 scanner：主动寻找正在广播的设备<br>4、发起连接 initiator：主动向扫描设备发起连接<br>5、主设备 master：作为主设备连接到其他设备<br>6、从设备 slave：作为从设备连接到其他设备</p>
+</blockquote>
+<p>####蓝牙设备的工作状态</p>
+<blockquote>
+<p>准备 standby<br>广播 advertising<br>监听扫描 scanning<br>发起连接 initiating<br>已连接 connected</p>
+</blockquote>
+<p>####iOS蓝牙中心模式实现<br><a href="http://blog.csdn.net/u010731949/article/details/74932225" target="_blank" rel="external">见下一篇文章</a></p>
 
+                <hr>
+                
 
-        </div>
-        <!-- Sidebar Container -->
-        <div class="
-                col-lg-3 col-lg-offset-0
-                col-md-3 col-md-offset-0
-                col-sm-12
-                col-xs-12
-                sidebar-container
-            ">
-
-            <!-- About Me -->
-            <section class="visible-md visible-lg" style="padding: 0 18px">
-                <div class="short-about">
-                    <!--侧边栏头像-->
+                <ul class="pager">
                     
-                    <img src="/images/avatar_cat.jpg"/>
                     
-                    <h5><a href="/about/">John</a></h5>
+                    <li class="next">
+                        <a href="/2016/11/29/CLLocationManager定位坐标不准确问题以及WGS_84转GCJ_02坐标位置纠错的方法/" data-toggle="tooltip" data-placement="top"
+                           title="CLLocationManager定位坐标不准确问题以及WGS_84转GCJ_02坐标位置纠错的方法">Next Post &rarr;</a>
+                    </li>
                     
-                    <p>iOSのcoder</p>
-                    
-                    <hr>
-                    <!-- SNS Link 社交 -->
-                    <ul class="list-inline">
-                        
-                        
-                        <li>
-                            <a target="_blank" href="https://twitter.com/ZhangxJack">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                                        </span>
-                            </a>
-                        </li>
-                        
-                        
+                </ul>
 
-                        
-                        <li>
-                            <a target="_blank" href="http://weibo.com/jakajacky">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
-                                        </span>
-                            </a>
-                        </li>
-                        
-
-                        
-
-                        
-                        <li>
-                            <a target="_blank" href="https://github.com/jakajacky">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                                        </span>
-                            </a>
-                        </li>
-                        
-
-                        
-                    </ul>
+                
+                <!-- 多说评论框 start -->
+                <div class="comment">
+                    <div class="ds-thread"
+                         data-thread-key="2017/07/10/iOS蓝牙开发（一）：蓝牙相关基础知识/"
+                         data-title="iOS蓝牙开发（一）：蓝牙相关基础知识"
+                         data-url="https://jakajacky.github.io/2017/07/10/iOS蓝牙开发（一）：蓝牙相关基础知识/">
+                    </div>
                 </div>
-            </section>
+                <!-- 多说评论框 end -->
+                
 
-            <!-- Featured Tags  标签 -->
-            
-            <section>
-                <div class="tags">
-                    
-                    
-                    <a href="/tags/#iOS" title="iOS"
-                       rel="9">iOS</a>
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#notify方式："><span class="toc-text">  notify方式：</span></a></li></ol>
                 </div>
-            </section>
-            
-
-            
-
+            </div>
         </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#iOS"
+                           title="iOS">iOS</a>
+                        
+                        <a class="tag" href="/tags/#BLE"
+                           title="BLE">BLE</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
     </div>
-</div>
+</article>
+
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    // dynamic User by Hux
+    var _user = 'jakajacky';
+
+    // duoshuo comment query.
+    var duoshuoQuery = {short_name: _user};
+    (function () {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';
+        ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+<!-- 多说公共JS代码 end -->
+
+
+
+
 
 <!-- Footer -->
 <!-- Footer -->
