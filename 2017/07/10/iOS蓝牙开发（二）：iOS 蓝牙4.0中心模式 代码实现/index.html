@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="iOSのcoder">
+    <meta name="keyword" content="undefined">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="/images/123.png">
+    <link rel="alternate" type="application/atom+xml" title="Roach" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        iOS蓝牙开发（二）：iOS蓝牙4.0中心模式代码实现｜Roach&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://jakajacky.github.io/2017/07/10/iOS蓝牙开发（二）：iOS 蓝牙4.0中心模式 代码实现/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+<script src="https://cdn1.lncld.net/static/js/av-min-1.2.1.js"></script>
+  <script>AV.initialize("8RMsHdqS4LlmCNTAWSkQGAhi-gzGzoHsz", "XyMHhDU9fNjGXeQit3dPjvbi");</script>
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('/images/about-bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Roach
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/Resume/">Resume</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/tags/">tags</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="/images/post-default.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('/images/post-default.jpg')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>iOS蓝牙开发（二）：iOS蓝牙4.0中心模式代码实现</h1>
+                    
+                    <span class="meta">
+                         作者 john
+                        <span>
+                          日期 2017-07-10
+                         </span>
+                         <span id="busuanzi_container_page_pv">
+                          阅读量<span id="busuanzi_value_page_pv"></span>次
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#iOS"
+                           title="iOS">iOS</a>
+                        
+                        <a class="tag" href="/tags/#BLE"
+                           title="BLE">BLE</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            iOS蓝牙开发（二）：iOS蓝牙4.0中心模式代码实现
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <p></p><p>上一篇简单介绍了蓝牙的部分基础知识，详细的东西大家可以去github上搜babyBluetooth，里面有一些学习资料</p><p></p>
+<h3 id="iOS连接外设的流程"><a href="#iOS连接外设的流程" class="headerlink" title="iOS连接外设的流程"></a>iOS连接外设的流程</h3><ul>
+<li>建立中心管理者</li>
+<li>扫描外设 discoverPeripheral</li>
+<li>连接外设 connectPeripheral</li>
+<li>扫描外设中的服务和特征 discoverServices discoverCharacteristics<ul>
+<li>获取外设的services</li>
+<li>获取外设service中的characteristics</li>
+<li>获取characteristic的值value、descriptor的value</li>
+</ul>
+</li>
+<li>与外设做数据交互 write、read</li>
+<li>订阅characteristic的通知notify</li>
+<li>断开连接 disconnected<h3 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h3></li>
+</ul>
+<blockquote>
+<p>1、导入CoreBluetooth头文件，建立中心管理类，设置代理</p>
+</blockquote>
+<pre><code>#import &lt;CoreBluetooth/CoreBluetooth.h&gt;
+@interface ViewController : UIViewController&lt;CBCentralManagerDelegate&gt;
+@interface ViewController (){
+    //系统蓝牙设备管理对象，可以把他理解为主设备，通过他，可以去扫描和链接外设
+    CBCentralManager *manager;
+    //用于保存被发现设备
+    NSMutableArray *peripherals;
+}
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    /*
+     设置主设备的委托,CBCentralManagerDelegate
+        必须实现的：
+        - (void)centralManagerDidUpdateState:(CBCentralManager *)central;//主设备状态改变的委托，在初始化CBCentralManager的适合会打开设备，只有当设备正确打开后才能使用
+        其他选择实现的委托中比较重要的：
+        - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI; //找到外设的委托
+        - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral;//连接外设成功的委托
+        - (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error;//外设连接失败的委托
+        - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error;//断开外设的委托
+    */
+     //初始化并设置委托和线程队列，最好一个线程的参数可以为nil，默认会就main线程
+     manager = [[CBCentralManager alloc]initWithDelegate:self queue:dispatch_get_main_queue()];
+</code></pre><blockquote>
+<p>2、扫描外设（discover），扫描外设的方法我们放在centralManager成功打开的委托中，因为只有设备成功打开，才能开始扫描，否则会报错。<br>所以当重新连接外设时，都不会成功，因为states还没打开；一般自己写蓝牙，这个地方要处理一下，连接的时候判断一下，还未打开就重连，一直等到PoweredOn</p>
+</blockquote>
+<pre><code>-(void)centralManagerDidUpdateState:(CBCentralManager *)central{
+        switch (central.state) {
+            case CBCentralManagerStateUnknown:
+                NSLog(@&quot;&gt;&gt;&gt;CBCentralManagerStateUnknown&quot;);
+                break;
+            case CBCentralManagerStateResetting:
+                NSLog(@&quot;&gt;&gt;&gt;CBCentralManagerStateResetting&quot;);
+                break;
+            case CBCentralManagerStateUnsupported:
+                NSLog(@&quot;&gt;&gt;&gt;CBCentralManagerStateUnsupported&quot;);
+                break;
+            case CBCentralManagerStateUnauthorized:
+                NSLog(@&quot;&gt;&gt;&gt;CBCentralManagerStateUnauthorized&quot;);
+                break;
+            case CBCentralManagerStatePoweredOff:
+                NSLog(@&quot;&gt;&gt;&gt;CBCentralManagerStatePoweredOff&quot;);
+                break;
+            case CBCentralManagerStatePoweredOn:
+                NSLog(@&quot;&gt;&gt;&gt;CBCentralManagerStatePoweredOn&quot;);
+                //开始扫描周围的外设
+                /*
+                 第一个参数nil就是扫描周围所有的外设，扫描到外设后会进入
+                      - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI;
+                 */
+                [manager scanForPeripheralsWithServices:nil options:nil];
+                break;
+            default:
+                break;
+        }
+    }
+
+    //扫描到设备会进入方法
+    -(void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI{
+
+        NSLog(@&quot;当扫描到设备:%@&quot;,peripheral.name);
+        //接下来可以连接设备
+
+    }
+</code></pre><blockquote>
+<p>3、连接外设<br>有一点注意，找到的peripheral必须被持有：(比如添加到数组、赋值给另一个被持有的变量)，否则CBCentralManager中也不会保存这个peripheral，那么CBPeripheralDelegate中的方法也不会被调用</p>
+</blockquote>
+<pre><code>//扫描到设备会进入方法
+-(void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI{
+
+    //接下连接我们的测试设备，如果你没有设备，可以下载一个app叫lightbule的app去模拟一个设备
+    //这里自己去设置下连接规则，我设置的是P开头的设备
+           if ([peripheral.name hasPrefix:@&quot;P&quot;]){
+           /*
+               一个主设备最多能连7个外设，每个外设最多只能给一个主设备连接,连接成功，失败，断开会进入各自的委托
+            - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral;//连接外设成功的委托
+            - (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error;//外设连接失败的委托
+            - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error;//断开外设的委托
+            */
+
+            //找到的设备必须持有它，否则CBCentralManager中也不会保存peripheral，那么CBPeripheralDelegate中的方法也不会被调用！！
+            [peripherals addObject:peripheral];
+            //连接设备
+           [manager connectPeripheral:peripheral options:nil];
+       }
+
+}
+
+
+//连接到Peripherals-成功
+- (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
+{
+    NSLog(@&quot;&gt;&gt;&gt;连接到名称为（%@）的设备-成功&quot;,peripheral.name);
+}
+
+//连接到Peripherals-失败
+-(void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
+{
+    NSLog(@&quot;&gt;&gt;&gt;连接到名称为（%@）的设备-失败,原因:%@&quot;,[peripheral name],[error localizedDescription]);
+}
+
+//Peripherals断开连接
+- (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error{
+    NSLog(@&quot;&gt;&gt;&gt;外设连接断开连接 %@: %@\n&quot;, [peripheral name], [error localizedDescription]);
+
+}
+</code></pre><blockquote>
+<p>4、扫描外设中的服务和特征(discover)<br>    设备连接成功后，就可以扫描设备的服务了，同样是通过委托形式，扫描到结果后会进入委托方法。但是这个委托已经不再是主设备的委托（CBCentralManagerDelegate），而是外设的委托（CBPeripheralDelegate）,这个委托包含了主设备与外设交互的许多 回叫方法，包括获取services，获取characteristics，获取characteristics的值，获取characteristics的Descriptor，和Descriptor的值，写数据，读rssi，用通知的方式订阅数据等等。</p>
+<p>5、获取外设的services</p>
+</blockquote>
+<pre><code>//连接到Peripherals-成功
+- (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
+{
+    NSLog(@&quot;&gt;&gt;&gt;连接到名称为（%@）的设备-成功&quot;,peripheral.name);
+    //设置的peripheral委托CBPeripheralDelegate
+    //@interface ViewController : UIViewController&lt;CBCentralManagerDelegate,CBPeripheralDelegate&gt;
+    [peripheral setDelegate:self];
+    //扫描外设Services，成功后会进入方法：-(void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error{
+    [peripheral discoverServices:nil];
+
+}
+
+//扫描到Services
+-(void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error{
+    //  NSLog(@&quot;&gt;&gt;&gt;扫描到服务：%@&quot;,peripheral.services);
+    if (error)
+    {
+        NSLog(@&quot;&gt;&gt;&gt;Discovered services for %@ with error: %@&quot;, peripheral.name, [error localizedDescription]);
+        return;
+    }
+
+    for (CBService *service in peripheral.services) {
+                     NSLog(@&quot;%@&quot;,service.UUID);
+                     //扫描每个service的Characteristics，扫描到后会进入方法： -(void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error
+                     [peripheral discoverCharacteristics:nil forService:service];
+                 }
+}
+</code></pre><blockquote>
+<p>6、获取外设的Characteristics,获取Characteristics的值，获取Characteristics的Descriptor和Descriptor的值</p>
+</blockquote>
+<pre><code>    //扫描到Characteristics
+ -(void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error{
+     if (error)
+     {
+         NSLog(@&quot;error Discovered characteristics for %@ with error: %@&quot;, service.UUID, [error localizedDescription]);
+         return;
+     }
+
+     for (CBCharacteristic *characteristic in service.characteristics)
+     {
+         NSLog(@&quot;service:%@ 的 Characteristic: %@&quot;,service.UUID,characteristic.UUID);
+     }
+
+     //获取Characteristic的值，读到数据会进入方法：-(void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
+     for (CBCharacteristic *characteristic in service.characteristics){
+         {
+             [peripheral readValueForCharacteristic:characteristic];
+         }
+     }
+
+     //搜索Characteristic的Descriptors，读到数据会进入方法：-(void)peripheral:(CBPeripheral *)peripheral didDiscoverDescriptorsForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
+     for (CBCharacteristic *characteristic in service.characteristics){
+         [peripheral discoverDescriptorsForCharacteristic:characteristic];
+     }
+
+
+ }
+
+//获取的charateristic的值
+-(void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error{
+    //打印出characteristic的UUID和值
+    //!注意，value的类型是NSData，具体开发时，会根据外设协议制定的方式去解析数据
+    NSLog(@&quot;characteristic uuid:%@  value:%@&quot;,characteristic.UUID,characteristic.value);
+
+}
+
+//搜索到Characteristic的Descriptors
+-(void)peripheral:(CBPeripheral *)peripheral didDiscoverDescriptorsForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error{
+
+    //打印出Characteristic和他的Descriptors
+     NSLog(@&quot;characteristic uuid:%@&quot;,characteristic.UUID);
+    for (CBDescriptor *d in characteristic.descriptors) {
+        NSLog(@&quot;Descriptor uuid:%@&quot;,d.UUID);
+    }
+
+}
+//获取到Descriptors的值
+-(void)peripheral:(CBPeripheral *)peripheral didUpdateValueForDescriptor:(CBDescriptor *)descriptor error:(NSError *)error{
+    //打印出DescriptorsUUID 和value
+    //这个descriptor都是对于characteristic的描述，一般都是字符串，所以这里我们转换成字符串去解析
+    NSLog(@&quot;characteristic uuid:%@  value:%@&quot;,[NSString stringWithFormat:@&quot;%@&quot;,descriptor.UUID],descriptor.value);
+}    
+</code></pre><blockquote>
+<p>7、把数据写到Characteristic中</p>
+</blockquote>
+<pre><code>//写数据
+-(void)writeCharacteristic:(CBPeripheral *)peripheral
+            characteristic:(CBCharacteristic *)characteristic
+                     value:(NSData *)value{
+
+    //打印出 characteristic 的权限，可以看到有很多种，这是一个NS_OPTIONS，就是可以同时用于好几个值，常见的有read，write，notify，indicate，知知道这几个基本就够用了，前连个是读写权限，后两个都是通知，两种不同的通知方式。
+    /*
+     typedef NS_OPTIONS(NSUInteger, CBCharacteristicProperties) {
+     CBCharacteristicPropertyBroadcast                                                = 0x01,
+     CBCharacteristicPropertyRead                                                    = 0x02,
+     CBCharacteristicPropertyWriteWithoutResponse                                    = 0x04,
+     CBCharacteristicPropertyWrite                                                    = 0x08,
+     CBCharacteristicPropertyNotify                                                    = 0x10,
+     CBCharacteristicPropertyIndicate                                                = 0x20,
+     CBCharacteristicPropertyAuthenticatedSignedWrites                                = 0x40,
+     CBCharacteristicPropertyExtendedProperties                                        = 0x80,
+     CBCharacteristicPropertyNotifyEncryptionRequired NS_ENUM_AVAILABLE(NA, 6_0)        = 0x100,
+     CBCharacteristicPropertyIndicateEncryptionRequired NS_ENUM_AVAILABLE(NA, 6_0)    = 0x200
+     };
+
+     */
+    NSLog(@&quot;%lu&quot;, (unsigned long)characteristic.properties);
+
+
+    //只有 characteristic.properties 有write的权限才可以写
+    if(characteristic.properties &amp; CBCharacteristicPropertyWrite){
+        /*
+            最好一个type参数可以为CBCharacteristicWriteWithResponse或type:CBCharacteristicWriteWithResponse,区别是是否会有反馈
+        */
+        [peripheral writeValue:value forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
+    }else{
+        NSLog(@&quot;该字段不可写！&quot;);
+    }
+
+
+}
+</code></pre><blockquote>
+<p>8、订阅Characteristic的通知<br>一般在discoverCharacteristic的代理中，发现了类型是notify的characteristic，直接就可以订阅了</p>
+</blockquote>
+<pre><code>    //设置通知
+-(void)notifyCharacteristic:(CBPeripheral *)peripheral
+            characteristic:(CBCharacteristic *)characteristic{
+    //设置通知，数据通知会进入：didUpdateValueForCharacteristic方法
+    [peripheral setNotifyValue:YES forCharacteristic:characteristic];
+
+}
+
+//取消通知
+-(void)cancelNotifyCharacteristic:(CBPeripheral *)peripheral
+             characteristic:(CBCharacteristic *)characteristic{
+
+     [peripheral setNotifyValue:NO forCharacteristic:characteristic];
+}
+</code></pre><blockquote>
+<p>9、断开连接(disconnect)</p>
+</blockquote>
+<pre><code>    //停止扫描并断开连接
+-(void)disconnectPeripheral:(CBCentralManager *)centralManager
+                 peripheral:(CBPeripheral *)peripheral{
+    //停止扫描
+    [centralManager stopScan];
+    //断开连接
+    [centralManager cancelPeripheralConnection:peripheral];
+}
+</code></pre><h3 id="iOS中蓝牙模块OTA升级（YModem协议）"><a href="#iOS中蓝牙模块OTA升级（YModem协议）" class="headerlink" title="iOS中蓝牙模块OTA升级（YModem协议）"></a>iOS中蓝牙模块OTA升级（YModem协议）</h3><p><a href="http://blog.csdn.net/u010731949/article/details/74936735" target="_blank" rel="external">见下一篇文章</a></p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/07/11/iOS蓝牙开发（三）：iOS中蓝牙模块OTA升级（YModem协议）/" data-toggle="tooltip" data-placement="top"
+                           title="">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/07/10/iOS蓝牙开发（一）：蓝牙相关基础知识/" data-toggle="tooltip" data-placement="top"
+                           title="iOS蓝牙开发（一）：蓝牙相关基础知识">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+                <!-- 多说评论框 start -->
+                <div class="comment">
+                    <div class="ds-thread"
+                         data-thread-key="2017/07/10/iOS蓝牙开发（二）：iOS 蓝牙4.0中心模式 代码实现/"
+                         data-title="iOS蓝牙开发（二）：iOS蓝牙4.0中心模式代码实现"
+                         data-url="https://jakajacky.github.io/2017/07/10/iOS蓝牙开发（二）：iOS 蓝牙4.0中心模式 代码实现/">
+                    </div>
+                </div>
+                <!-- 多说评论框 end -->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#iOS连接外设的流程"><span class="toc-text">iOS连接外设的流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现步骤"><span class="toc-text">实现步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#iOS中蓝牙模块OTA升级（YModem协议）"><span class="toc-text">iOS中蓝牙模块OTA升级（YModem协议）</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#iOS"
+                           title="iOS">iOS</a>
+                        
+                        <a class="tag" href="/tags/#BLE"
+                           title="BLE">BLE</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    // dynamic User by Hux
+    var _user = 'jakajacky';
+
+    // duoshuo comment query.
+    var duoshuoQuery = {short_name: _user};
+    (function () {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';
+        ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+<!-- 多说公共JS代码 end -->
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/ZhangxJack">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/jakajacky">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/jakajacky">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Roach 2017
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://jakajacky.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = '4cc1f2d8f3067386cc5cdb626a202900';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','undefined','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--page counter part-->
+<script>
+function addCount (Counter) {
+        url=$('.article-date').attr('href').trim();
+        title = $('.article-title').text().trim();
+        var query=new AV.Query(Counter);
+        //use url as unique idnetfication
+        query.equalTo("url",url);
+        query.find({
+            success: function(results){
+                if(results.length>0)
+                {
+                    var counter=results[0];
+                    counter.fetchWhenSave(true); //get recent result
+                    counter.increment("time");
+                    counter.save();
+                }
+                else
+                {
+                    var newcounter=new Counter();
+                    newcounter.set("title",title);
+                    newcounter.set("url",url);
+                    newcounter.set("time",1);
+                    newcounter.save(null,{
+                        success: function(newcounter){
+                        //alert('New object created');
+                        },
+                        error: function(newcounter,error){
+                        alert('Failed to create');
+                        }
+                        });
+                }
+            },
+            error: function(error){
+                //find null is not a error
+                alert('Error:'+error.code+" "+error.message);
+            }
+        });
+}
+$(function(){
+        var Counter=AV.Object.extend("Counter");
+        //only increse visit counting when intering a page
+        if ($('.article-title').length == 1)
+           addCount(Counter);
+        var query=new AV.Query(Counter);
+        query.descending("time");
+        // the sum of popular posts
+        query.limit(10); 
+        query.find({
+            success: function(results){
+                    for(var i=0;i<results.length;i++)    
+                    {
+                        var counter=results[i];
+                        title=counter.get("title");
+                        url=counter.get("url");
+                        time=counter.get("time");
+                        // add to the popularlist widget
+                        showcontent=title+" ("+time+")";
+                        //notice the "" in href
+                        $('.popularlist').append('<li><a href="'+url+'">'+showcontent+'</a></li>');
+                    }
+                },
+            error: function(error){
+                alert("Error:"+error.code+" "+error.message);
+            }
+            }
+        )
+        });
+</script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="/images/avatar_cat.jpg">
+</body>
+
+</html>
