@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
     <title>
         
-        Roach&#39;s blog
+        iOS蓝牙开发（三）：iOS中蓝牙模块OTA升级（YModem协议）｜Roach&#39;s blog
         
     </title>
 
@@ -155,10 +155,10 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
                 <div class="post-heading">
-                    <h1></h1>
+                    <h1>iOS蓝牙开发（三）：iOS中蓝牙模块OTA升级（YModem协议）</h1>
                     
                     <span class="meta">
-                         作者 John
+                         作者 john
                         <span>
                           日期 2017-07-11
                          </span>
@@ -168,6 +168,18 @@
                     </span>
                     <div class="tags text-center">
                         
+                        <a class="tag" href="/tags/#iOS"
+                           title="iOS">iOS</a>
+                        
+                        <a class="tag" href="/tags/#BLE"
+                           title="BLE">BLE</a>
+                        
+                        <a class="tag" href="/tags/#OTA"
+                           title="OTA">OTA</a>
+                        
+                        <a class="tag" href="/tags/#YModem"
+                           title="YModem">YModem</a>
+                        
                     </div>
                 </div>
             </div>
@@ -175,7 +187,7 @@
     </div>
     <div class="post-title-haojen">
         <span>
-            
+            iOS蓝牙开发（三）：iOS中蓝牙模块OTA升级（YModem协议）
         </span>
     </div>
 </header>
@@ -186,25 +198,28 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <p></p><p>上一篇简单介绍了蓝牙4.0的iOS实现代码，详细的东西大家可以去github上搜babyBluetooth，里面有一些学习资料，接下来分享的是OTA升级的东西，我们假定看这篇文章的时候，关于iOS和外设间的蓝牙收发数据已经掌握的很6</p><p></p>
-<p>####OTA详解</p>
-<blockquote>
+                <p>上一篇简单介绍了蓝牙4.0的iOS实现代码，详细的东西大家可以去github上搜babyBluetooth，里面有一些学习资料，接下来分享的是OTA升级的东西，我们假定看这篇文章的时候，关于iOS和外设间的蓝牙收发数据已经掌握的很6</p>
+
+<h3 id="OTA详解"><a href="#OTA详解" class="headerlink" title="OTA详解"></a>OTA详解</h3><blockquote>
 <p>OTA（Over-the-Air）空中传输，一般用于固件升级。其实和数据传输一样，很简单，发送指令，接受指令，发送bin数据包，结束指令。。。只是蓝牙传输的数据大小使得这一步骤稍显复杂。</p>
 <p>首先，文件传输，其实也是传输的数据，即 NSData，和普通的 peripheral 写入没什么区别。固件升级的文件一般是 .bin 文件，也有 .zip 的。不过这些文件，都是数据，所以首先将文件转为 NSData</p>
 <p>需要注意的是：data 一般很长，毕竟是文件。直接通过 writeValue:forCharacteristic:type: 写入的话，不会有任何回调。哪怕是错误的回调，都没有。这是因为蓝牙单次传输的数据大小是有限制的。</p>
 <p>我们一般使用20bytes作为标准，即将bin文件转为NSData，然后截成每个20bytes的包发送；这些步骤需要和刷firmware的工程师协商，指定一个协议，接下来以公司的YModem协议举例</p>
-<p>####YModem协议<br>YModem协议是由XModem协议演变而来的，是一种发送并等待的协议，即发送方发送一个数据包以后，都 要等待接收方的确认。如果是 ACK 信号，则可以发送新的包。如果是 NAK 信号， 则重发或者错误退出。</p>
+</blockquote>
+<h3 id="YModem协议"><a href="#YModem协议" class="headerlink" title="YModem协议"></a>YModem协议</h3><blockquote>
+<p>YModem协议是由XModem协议演变而来的，是一种发送并等待的协议，即发送方发送一个数据包以后，都 要等待接收方的确认。如果是 ACK 信号，则可以发送新的包。如果是 NAK 信号， 则重发或者错误退出。</p>
 <p>每包数据可以达到1024字节，是一个非常高效的文件传输协议</p>
-<p>#####所用到的符号</p>
-<pre><code>#define MODEM_SOH 0x01  //数据块起始字符
+</blockquote>
+<h4 id="所用到的符号"><a href="#所用到的符号" class="headerlink" title="所用到的符号"></a>所用到的符号</h4><pre><code>#define MODEM_SOH 0x01  //数据块起始字符
 #define MODEM_STX 0x02  //1028字节开始
 #define MODEM_EOT 0x04  //文件传输结束
 #define MODEM_ACK 0x06  //确认应答 
 #define MODEM_NAK 0x15  //出现错误
 #define MODEM_CAN 0x18  //取消传输
 #define MODEM_C 0x43    //大写字母C
-</code></pre><p>#####数据格式示意<br><img src="http://img.blog.csdn.net/20170711094758967?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMDczMTk0OQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p>#####文件传输过程<br>开启是由接收方开启传输，它发一个大写字母 C（0x43） 开启传输。然后进入 等待 SOH（0x01）)状态，如果没有回应，就会超时退出。</p>
+</code></pre><h4 id="数据格式示意"><a href="#数据格式示意" class="headerlink" title="数据格式示意"></a>数据格式示意</h4><p><img src="http://img.blog.csdn.net/20170711094758967?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMDczMTk0OQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h4 id="文件传输过程"><a href="#文件传输过程" class="headerlink" title="文件传输过程"></a>文件传输过程</h4><blockquote>
+<p>开启是由接收方开启传输，它发一个大写字母 C（0x43） 开启传输。然后进入 等待 SOH（0x01）)状态，如果没有回应，就会超时退出。</p>
 <p>发送方开始时处于等待过程中，等待 C。收到 C 以后，发送(SOH)数 据包开始信号，发送序号(00)，补码(FF)，“文件名”，“\0”“文件大小” “除去序号外，补满 128 字节”，16位CRC 校验两个字节，高字节在前，低字节在后。进入等待(ACK)状态。</p>
 <pre><code>- 内容示例： SOH 00 FF Foo.bin NUL[123] CRC CRC
 </code></pre><p>接收方收到以后，CRC 校验满足，则发送 ACK。发送方接收到 ACK，又 进入等待“文件传输开启”信号，即重新进入等待“C”的状态。</p>
@@ -215,8 +230,8 @@
 <p>当然Ymodem相对于Xmodem改进的地方就在于传输再次 开启以后，又可以发送另外一个文件，即一次传输允许发送多个文件，但这个 特性我还没有用过，暂且不提。</p>
 <p>最后CRC两字节：这里需要注意，只有数据部分128或者1024参与了效CRC验,不包括头和编码部分。</p>
 </blockquote>
-<p>#####CRC校验的计算方法<br>    /**</p>
-<pre><code> * @brief  Update CRC16 for input byte
+<h4 id="CRC校验的计算方法"><a href="#CRC校验的计算方法" class="headerlink" title="CRC校验的计算方法"></a>CRC校验的计算方法</h4><pre><code>/**
+ * @brief  Update CRC16 for input byte
  * @param  crc_in input value
  * @param  input byte
  * @retval None
@@ -254,7 +269,7 @@ uint16_t Cccal_CRC16(const uint8_t* p_data, uint32_t size)
   return crc&amp;0xffffu;
 }
 </code></pre><p>以上就是YModem协议进行OTA升级的概述</p>
-<p>####YModem协议以及OTA部分源码<br><a href="https://github.com/jakajacky/OTA_YModem" target="_blank" rel="external">https://github.com/jakajacky/OTA_YModem</a></p>
+<h3 id="YModem协议以及OTA部分源码"><a href="#YModem协议以及OTA部分源码" class="headerlink" title="YModem协议以及OTA部分源码"></a>YModem协议以及OTA部分源码</h3><p><a href="https://github.com/jakajacky/OTA_YModem" target="_blank" rel="external">https://github.com/jakajacky/OTA_YModem</a></p>
 
                 <hr>
                 
@@ -274,7 +289,7 @@ uint16_t Cccal_CRC16(const uint8_t* p_data, uint32_t size)
                 <div class="comment">
                     <div class="ds-thread"
                          data-thread-key="2017/07/11/iOS蓝牙开发（三）：iOS中蓝牙模块OTA升级（YModem协议）/"
-                         data-title=""
+                         data-title="iOS蓝牙开发（三）：iOS中蓝牙模块OTA升级（YModem协议）"
                          data-url="https://jakajacky.github.io/2017/07/11/iOS蓝牙开发（三）：iOS中蓝牙模块OTA升级（YModem协议）/">
                     </div>
                 </div>
@@ -287,7 +302,7 @@ uint16_t Cccal_CRC16(const uint8_t* p_data, uint32_t size)
 
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
-                    
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#OTA详解"><span class="toc-text">OTA详解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#YModem协议"><span class="toc-text">YModem协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#所用到的符号"><span class="toc-text">所用到的符号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数据格式示意"><span class="toc-text">数据格式示意</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#文件传输过程"><span class="toc-text">文件传输过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CRC校验的计算方法"><span class="toc-text">CRC校验的计算方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#YModem协议以及OTA部分源码"><span class="toc-text">YModem协议以及OTA部分源码</span></a></li></ol>
                 </div>
             </div>
         </div>
@@ -308,6 +323,18 @@ uint16_t Cccal_CRC16(const uint8_t* p_data, uint32_t size)
                         <a href="/tags/">FEATURED TAGS</a>
                     </h5>
                     <div class="tags">
+                        
+                        <a class="tag" href="/tags/#iOS"
+                           title="iOS">iOS</a>
+                        
+                        <a class="tag" href="/tags/#BLE"
+                           title="BLE">BLE</a>
+                        
+                        <a class="tag" href="/tags/#OTA"
+                           title="OTA">OTA</a>
+                        
+                        <a class="tag" href="/tags/#YModem"
+                           title="YModem">YModem</a>
                         
                     </div>
                 </section>
