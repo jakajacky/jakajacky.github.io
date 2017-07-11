@@ -198,7 +198,7 @@
 </blockquote>
 <p>###中心模式流程</p>
 <blockquote>
-<p>1、建立中心管理centralManager<br>2、扫描外设discoverPeripheral<br>3、连接外设connectPeripheral<br>4、扫描外设中的Service<br>5、扫描Service中的Characteristic<br>6、获取Characteristic的值value以及Description<br>7、与外设做数据交互，write、read/notify订阅<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; read：主动获取数据；notify：外设主动发送通知<br>*–notify方式：</p>
+<p>1、建立中心管理centralManager<br>2、扫描外设discoverPeripheral<br>3、连接外设connectPeripheral<br>4、扫描外设中的Service<br>5、扫描Service中的Characteristic<br>6、获取Characteristic的值value以及Description<br>7、与外设做数据交互，write、read/notify订阅<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; read：主动获取数据；notify：外设主动发送通知<br>*– notify方式：</p>
 <pre><code>*-- 
 *-- 订阅成功后回调didUpdateNotificationStateForCharacteristic
 *-- 订阅后characteristic的值发生变化会发送通知到didUpdateValueForCharacteristic
