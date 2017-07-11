@@ -193,23 +193,13 @@
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
                 <p>####蓝牙常见词汇</p>
-<ul>
-<li>MFI ：苹果认证的设备</li>
-<li>BLE ：bluetooth low energy 说明蓝牙4.0设备明显的特点是<font color="red">耗电低</font></li>
-<li>Central ：中心，发起连接的设备</li>
-<li>Peripheral ：外设，被连接的设备</li>
-<li>Service ：服务，一个外设有多个服务，类似于服务端的API</li>
-<li>Characteristic ：特征，一个服务有多个特征，特征的权限有read、write、notify几种</li>
-<li>Description ：描述Characteristic的信息或属性，每个Characteristic可以对应多个Description</li>
-<li>APP中常见的是中心模式，即手机作为Central</li>
-<li>对于iOS BLE开发，用CoreBluetooth框架、开发MFI，用ExternalAccessory框架</li>
-</ul>
+<blockquote>
+<p>MFI ：苹果认证的设备<br>BLE ：bluetooth low energy 说明蓝牙4.0设备明显的特点是<font color="red">耗电低</font><br>Central ：中心，发起连接的设备<br>Peripheral ：外设，被连接的设备<br>Service ：服务，一个外设有多个服务，类似于服务端的API<br>Characteristic ：特征，一个服务有多个特征，特征的权限有read、write、notify几种<br>Description ：描述Characteristic的信息或属性，每个Characteristic可以对应多个Description<br>APP中常见的是中心模式，即手机作为Central<br>对于iOS BLE开发，用CoreBluetooth框架、开发MFI，用ExternalAccessory框架</p>
+</blockquote>
 <p>####中心模式流程</p>
 <blockquote>
 <p>1、建立中心管理centralManager<br>2、扫描外设discoverPeripheral<br>3、连接外设connectPeripheral<br>4、扫描外设中的Service<br>5、扫描Service中的Characteristic<br>6、获取Characteristic的值value以及Description<br>7、与外设做数据交互，write、read/notify订阅<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; read：主动获取数据；notify：外设主动发送通知</p>
-<pre><code>notify方式：
--- 
-*-- 订阅成功后回调didUpdateNotificationStateForCharacteristic
+<h2 id="notify方式："><a href="#notify方式：" class="headerlink" title="notify方式："></a>notify方式：</h2><pre><code>*-- 订阅成功后回调didUpdateNotificationStateForCharacteristic
 *-- 订阅后characteristic的值发生变化会发送通知到didUpdateValueForCharacteristic
 *-- 取消订阅：设置setNotifyValue为NO
 [Peripheral setNotifyValue:YES forCharacteristic:characteristic];
@@ -259,7 +249,7 @@ read方式：
 
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
-                    
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#notify方式："><span class="toc-text">notify方式：</span></a></li></ol>
                 </div>
             </div>
         </div>
