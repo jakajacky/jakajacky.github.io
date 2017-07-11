@@ -192,13 +192,11 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <p>###蓝牙常见词汇</p>
-<blockquote>
+                <h3 id="蓝牙常见词汇"><a href="#蓝牙常见词汇" class="headerlink" title="蓝牙常见词汇"></a>蓝牙常见词汇</h3><blockquote>
 <p>MFI ：苹果认证的设备<br>BLE ：bluetooth low energy 说明蓝牙4.0设备明显的特点是<font color="red">耗电低</font><br>Central ：中心，发起连接的设备<br>Peripheral ：外设，被连接的设备<br>Service ：服务，一个外设有多个服务，类似于服务端的API<br>Characteristic ：特征，一个服务有多个特征，特征的权限有read、write、notify几种<br>Description ：描述Characteristic的信息或属性，每个Characteristic可以对应多个Description<br>APP中常见的是中心模式，即手机作为Central<br>对于iOS BLE开发，用CoreBluetooth框架、开发MFI，用ExternalAccessory框架</p>
 </blockquote>
-<p>###中心模式流程</p>
-<blockquote>
-<p>1、建立中心管理centralManager<br>2、扫描外设discoverPeripheral<br>3、连接外设connectPeripheral<br>4、扫描外设中的Service<br>5、扫描Service中的Characteristic<br>6、获取Characteristic的值value以及Description<br>7、与外设做数据交互，write、read/notify订阅<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; read：主动获取数据；notify：外设主动发送通知<br>*– notify方式：</p>
+<h3 id="中心模式流程"><a href="#中心模式流程" class="headerlink" title="中心模式流程"></a>中心模式流程</h3><blockquote>
+<p>1、建立中心管理centralManager<br>2、扫描外设discoverPeripheral<br>3、连接外设connectPeripheral<br>4、扫描外设中的Service<br>5、扫描Service中的Characteristic<br>6、获取Characteristic的值value以及Description<br>7、与外设做数据交互，write、read/notify订阅<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; read：主动获取数据；notify：外设主动发送通知<br>  *– notify方式：</p>
 <pre><code>*-- 
 *-- 订阅成功后回调didUpdateNotificationStateForCharacteristic
 *-- 订阅后characteristic的值发生变化会发送通知到didUpdateValueForCharacteristic
@@ -208,16 +206,13 @@ read方式：
 [Peripheral readValueForCharacteristic:characteristic];
 </code></pre><p>8、断开连接disConnectPeripheral</p>
 </blockquote>
-<p>###蓝牙设备状态</p>
-<blockquote>
+<h3 id="蓝牙设备状态"><a href="#蓝牙设备状态" class="headerlink" title="蓝牙设备状态"></a>蓝牙设备状态</h3><blockquote>
 <p>1、待机状态 standby：设备没有接受和发送数据，没有连接到任何central<br>2、广播状态 advertiser：周期性广播状态<br>3、扫描状态 scanner：主动寻找正在广播的设备<br>4、发起连接 initiator：主动向扫描设备发起连接<br>5、主设备 master：作为主设备连接到其他设备<br>6、从设备 slave：作为从设备连接到其他设备</p>
 </blockquote>
-<p>###蓝牙设备的工作状态</p>
-<blockquote>
+<h3 id="蓝牙设备的工作状态"><a href="#蓝牙设备的工作状态" class="headerlink" title="蓝牙设备的工作状态"></a>蓝牙设备的工作状态</h3><blockquote>
 <p>准备 standby<br>广播 advertising<br>监听扫描 scanning<br>发起连接 initiating<br>已连接 connected</p>
 </blockquote>
-<p>###iOS蓝牙中心模式实现</p>
-<p><a href="http://blog.csdn.net/u010731949/article/details/74932225" target="_blank" rel="external">见下一篇文章</a></p>
+<h3 id="iOS蓝牙中心模式实现"><a href="#iOS蓝牙中心模式实现" class="headerlink" title="iOS蓝牙中心模式实现"></a>iOS蓝牙中心模式实现</h3><p><a href="http://blog.csdn.net/u010731949/article/details/74932225" target="_blank" rel="external">见下一篇文章</a></p>
 
                 <hr>
                 
@@ -250,7 +245,7 @@ read方式：
 
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
-                    
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#蓝牙常见词汇"><span class="toc-text">蓝牙常见词汇</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#中心模式流程"><span class="toc-text">中心模式流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#蓝牙设备状态"><span class="toc-text">蓝牙设备状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#蓝牙设备的工作状态"><span class="toc-text">蓝牙设备的工作状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#iOS蓝牙中心模式实现"><span class="toc-text">iOS蓝牙中心模式实现</span></a></li></ol>
                 </div>
             </div>
         </div>
