@@ -3,5 +3,14 @@
         "apps": [
             "9Y7VB3CC26.com.miototech.PwdBox"
         ]
+    },
+    "applinks": {
+        "apps": [],
+        "details": [
+            {
+                "appID": "9Y7VB3CC26.com.miototech.PwdBox",
+                "paths": [ "*"]
+            }
+        ]
     }
 }
